@@ -173,7 +173,7 @@ end
 """
 $req_cookie_preserve_docstring
 """
-function req_cookie_preserve()
+function req_cookie_preserve(req::HTTP.Request, path::AbstractString)
 
 end
 
@@ -236,7 +236,7 @@ end
 """
 $req_url_docstring
 """
-function req_url()
+function req_url(req::HTTP.Request, url::String)
 
 end
 
@@ -483,21 +483,27 @@ end
 """
 $iterate_with_offset_docstring
 """
-function iterate_with_offset()
+function iterate_with_offset(
+    param_name::AbstractString, 
+    start::Int=1, 
+    offset::Int=1, 
+    resp_pages::Function=nothing, 
+    resp_complete::Function=nothing
+)
 
 end
 
 """
 $iterate_with_cursor_docstring
 """
-function iterate_with_cursor()
+function iterate_with_cursor(param_name::AbstractString, resp_param_value::Function)
 
 end
 
 """
 $iterate_with_link_url_docstring
 """
-function iterate_with_link_url()
+function iterate_with_link_url(rel::AbstractString)
 
 end
 
@@ -582,14 +588,14 @@ end
 """
 $resp_content_type_docstring
 """
-function resp_content_type()
+function resp_content_type(resp::HTTP.Response)
 
 end
 
 """
 $resp_encoding_docstring
 """
-function resp_encoding()
+function resp_encoding(resp::HTTP.Response)
 
 end
 
@@ -650,21 +656,26 @@ end
 """
 $resp_link_url_docstring
 """
-function resp_link_url()
+function resp_link_url(resp::HTTP.Response, rel::AbstractString)
 
 end
 
 """
 $resp_raw_docstring
 """
-function resp_raw()
-
+function resp_raw(resp::HTTP.Response)
+    status_line = string(resp.status)
+    headers = join(["$(k): $(v)" for (k, v) in resp.headers], "\n")
+    body = String(resp.body)
+    raw_response = "$status_line\n\n$headers\n\n$body"
+    println(raw_response)
+    return resp
 end
 
 """
 $resp_retry_after_docstring
 """
-function resp_retry_after()
+function resp_retry_after(resp::HTTP.Response)::Dates.Time
 
 end
 
