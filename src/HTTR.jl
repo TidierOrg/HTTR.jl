@@ -1,6 +1,6 @@
 module HTTR # Julia port of httr2 https://github.com/r-lib/httr2
 
-using HTTP, URIs, Dates
+using HTTP, URIs, Dates, Random
 
 export
     # request
@@ -603,22 +603,48 @@ end
 """
 $resp_headers_docstring
 """
-function resp_headers()
+function resp_headers(resp::HTTP.Response, filter::Union{Regex,Nothing}=nothing)
+    if filter === nothing
+        response_headers = resp.headers
+    else
+        response_headers = Dict(pair for pair in resp.headers if occursin(filter, lowercase(pair.first)))
+    end
 
+    for (key, value) in response_headers
+        println("$key: $value")
+    end
+
+    return response_headers
 end
 
 """
 $resp_header_docstring
 """
-function resp_header()
+function resp_header(resp::HTTP.Response, header::AbstractString, default=nothing)
+    header_lower = lowercase(header)
 
+    for pair in resp.headers
+        if lowercase(pair.first) == header_lower
+            return pair.second
+        end
+    end
+
+    return default
 end
 
 """
 $resp_header_exists_docstring
 """
-function resp_header_exists()
+function resp_header_exists(resp::HTTP.Response, header::AbstractString)::Bool
+    header_lower = lowercase(header)
 
+    for pair in resp.headers
+        if lowercase(pair.first) == header_lower
+            return true
+        end
+    end
+
+    return false
 end
 
 """
@@ -645,22 +671,23 @@ end
 """
 $resp_status_docstring
 """
-function resp_status()
-
+function resp_status(resp::HTTP.Response)::Int
+    return resp.status
 end
 
 """
 $resp_status_desc_docstring
 """
-function resp_status_desc()
-
+function resp_status_desc(resp::HTTP.Response)::String
+    
 end
 
 """
 $resp_is_error_docstring
 """
-function resp_is_error()
-
+function resp_is_error(resp::HTTP.Response)::Bool
+    status_code = resp.status
+    return status_code >= 400 && status_code < 600
 end
 
 """
@@ -748,56 +775,54 @@ curl_help()::String = println(CURL_OPTIONS)
 """
 $secret_make_key_docstring
 """
-function secret_make_key()
-
-end
+secret_make_key()::String = Random.randstring(32)
 
 """
 $secret_encrypt_docstring
 """
-function secret_encrypt()
+function secret_encrypt(encrypted::AbstractString, x::AbstractString)
 
 end
 
 """
 $secret_decrypt_docstring
 """
-function secret_decrypt()
+function secret_decrypt(x::AbstractString)
 
 end
 
 """
 $secret_write_rds_docstring
 """
-function secret_write_rds()
+function secret_write_rds(x::AbstractString)
 
 end
 
 """
 $secret_read_rds_docstring
 """
-function secret_read_rds()
+function secret_read_rds(x::AbstractString)
 
 end
 
 """
 $secret_decrypt_file_docstring
 """
-function secret_decrypt_file()
+function secret_decrypt_file(x::AbstractString)
 
 end
 
 """
 $secret_encrypt_file_docstring
 """
-function secret_encrypt_file()
+function secret_encrypt_file(x::AbstractString)
 
 end
 
 """
 $secret_has_key_docstring
 """
-function secret_has_key()
+function secret_has_key(x::AbstractString)
 
 end
 
