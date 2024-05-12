@@ -4,8 +4,6 @@ HTTR.jl, completed functions:
 - `resp_url_path()`
 - `resp_url_query()`
 - `resp_url_queries()`
-- `obfuscate()`
-- `obfuscated()`
 - `url_parse()`
 - `url_build()`
 
