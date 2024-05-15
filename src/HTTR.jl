@@ -1,6 +1,15 @@
 module HTTR # Julia port of httr2 https://github.com/r-lib/httr2
 
-using HTTP, URIs, Dates, Random
+using Chain
+using Dates
+using HTTP
+using JSON3
+using MacroTools
+using Random
+using Reexport
+using URIs
+
+@reexport using Chain
 
 export
     # request
@@ -229,7 +238,7 @@ end
 """
 $req_timeout_docstring
 """
-function req_timeout()
+function req_timeout(req::HTTP.Request, seconds::Int)
 
 end
 
@@ -786,7 +795,7 @@ curl_help()::String = println(CURL_OPTIONS)
 """
 $secret_make_key_docstring
 """
-secret_make_key()::String = Random.randstring(32)
+secret_make_key()::String = Random.randstring(16)
 
 """
 $secret_encrypt_docstring

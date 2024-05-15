@@ -1,7 +1,7 @@
 
 const request_docstring::String = 
 """
-    request_docstring(base_url::AbstractString)
+    HTTR.request_docstring(base_url::AbstractString)
 
 Create an HTTP request. Without any options, this creates a GET request.
 
@@ -429,12 +429,16 @@ const curl_translate_docstring::String =
 
 const curl_help_docstring::String = 
 """
+    HTTR.curl_help()::String
 
+This function prints out useful information about the `curl` command line tool.
 """
 
 const secret_make_key_docstring::String = 
 """
+    HTTR.secret_make_key()::String
 
+Generate a new secret key that is 16 characters long.
 """
 
 const secret_encrypt_docstring::String = 
