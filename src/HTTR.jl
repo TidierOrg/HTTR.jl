@@ -11,8 +11,11 @@ using URIs
 
 @reexport using Chain
 
+include("request.jl")
+
 export
     # request
+    RequestHTTR,
     request,
     req_body_raw,
     req_body_file,
