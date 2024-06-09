@@ -7,7 +7,7 @@ HTTR.jl, completed functions:
 - `url_parse()`
 - `url_build()`
 
-TODO (not sure if we need all of these)
+TODO (not sure if we need all of these yet)
 
 ### request
 - [ ] request()
