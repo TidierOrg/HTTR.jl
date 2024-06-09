@@ -2,7 +2,7 @@
 """
 $curl_translate_docstring
 """
-function curl_translate(cmd, simplify_headers::Bool=true)
+function curl_translate(cmd::String, simplify_headers::Bool=true)
 
 end
 
@@ -111,7 +111,7 @@ $url_parse_docstring
 """
 function url_parse(url::AbstractString)::Dict
     uri::URI = URIs.URI(url)
-    parsed_url::Dict = Dict(
+    return Dict(
         "scheme" => uri.scheme,
         "hostname" => uri.host,
         "port" => uri.port,
@@ -121,7 +121,6 @@ function url_parse(url::AbstractString)::Dict
         "username" => uri.user,
         "password" => uri.pass
     )
-    return parsed_url
 end
 
 """
@@ -137,6 +136,14 @@ function url_build(url::Dict)::String
     username = url["username"]
     password = url["password"]
 
-    uri::URI = URIs.URI(scheme, username, password, hostname, port, path, URIs.queryparampairs(query), fragment)
-    return Base.string(uri)
+    return Base.string(URIs.URI(
+        scheme, 
+        username, 
+        password, 
+        hostname, 
+        port, 
+        path, 
+        URIs.queryparampairs(query), 
+        fragment
+    ))
 end

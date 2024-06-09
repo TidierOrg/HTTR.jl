@@ -1,6 +1,7 @@
 module HTTR # Julia port of httr2 https://github.com/r-lib/httr2
 
-using Chain; export @chain
+using Chain
+export @chain
 
 using Dates
 using HTTP

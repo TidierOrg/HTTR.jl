@@ -15,56 +15,66 @@ end
 """
 $oauth_client_struct_docstring
 """
-struct OAuthClient
-    id::String
-    token_url::String
-    secret::Union{String,Nothing}
-    key::Union{String,Nothing}
-    auth::String
-    auth_params::Dict{String,Any}
-    name::String
+@kwdef mutable struct OAuthClient
+    id::AbstractString
+    token_url::AbstractString
+    secret::Union{AbstractString,Nothing} = nothing
+    key::Union{AbstractString,Nothing} = nothing
+    auth::Vector{AbstractString} = ["body", "header", "jwt_sig"]
+    auth_params::Dict{AbstractString,Any} = Dict()
+    name::AbstractString = Base.hash(id)
 end
 
 """
 $oauth_client_docstring
 """
 function oauth_client(
-    id::String,
-    token_url::String;
-    secret::Union{String,Nothing}=nothing,
-    key::Union{String,Nothing}=nothing,
-    auth::String="body",
-    auth_params::Dict{String,Any}=Dict(),
+    id::AbstractString,
+    token_url::AbstractString,;
+    secret::Union{AbstractString,Nothing}=nothing,
+    key::Union{AbstractString,Nothing}=nothing,
+    auth::Vector{AbstractString}=["body", "header", "jwt_sig"],
+    auth_params::Dict{AbstractString,Any}=Dict(),
     name::String=Base.hash(id)
-)
-    return OAuthClient(id, token_url, secret, key, auth, auth_params, name)
+
+)::OAuthClient
+
+    return OAuthClient(
+        id=id, 
+        token_url=token_url, 
+        secret=secret, 
+        key=key, 
+        auth=auth, 
+        auth_params=auth_params, 
+        name=name
+    )
 end
 
 """
 $oauth_client_req_auth_docstring
 """
-function oauth_client_req_auth(req, client)
+function oauth_client_req_auth(req::RequestHTTR, client::OAuthClient)
 
 end
 
 """
 $oauth_client_req_auth_header_docstring
 """
-function oauth_client_req_auth_header(req, client)
+function oauth_client_req_auth_header(req::RequestHTTR, client::OAuthClient)
 
 end
 
 """
 $oauth_client_req_auth_body_docstring
 """
-function oauth_client_req_auth_body(req, client)
+function oauth_client_req_auth_body(req::RequestHTTR, client::OAuthClient)
 
 end
 
 """
 $oauth_client_req_auth_jwt_sig_docstring
 """
-function oauth_client_req_auth_jwt_sig(req, client; claim, size::Int=256, header)
+function oauth_client_req_auth_jwt_sig(req::RequestHTTR, client::OAuthClient; claim, size::Int=256, header)
 
 end
 
@@ -84,26 +94,25 @@ end
 """
 $oauth_token_struct_docstring
 """
-struct OAuthToken
-    access_token::String
-    token_type::String
-    expires_in::Union{Nothing,Int}
-    expires_at::Union{Nothing,DateTime}
-    refresh_token::Union{Nothing,String}
-    additional_components::Dict{String,Any}
-    date::DateTime
+@kwdef mutable struct OAuthToken
+    access_token::AbstractString
+    token_type::AbstractString = "bearer"
+    expires_in::Union{Nothing,Int}=nothing
+    refresh_token::Union{Nothing,String}=nothing
+    date::DateTime=Dates.now()
+    additional_components::Dict{String,Any} = Dict()
 end
 
 """
 $oauth_token_docstring
 """
 function oauth_token(
-    access_token::String;
-    token_type::String="bearer",
+    access_token::AbstractString,
+    token_type::AbstractString = "bearer",
     expires_in::Union{Nothing,Int}=nothing,
     refresh_token::Union{Nothing,String}=nothing,
+    date::DateTime=Dates.now(),
     additional_components::Dict{String,Any}=Dict(),
-    date::DateTime=Dates.now()
 )
     if expires_in === nothing
         expires_at = nothing
@@ -112,12 +121,12 @@ function oauth_token(
     end
 
     return OAuthToken(
-        access_token,
-        token_type,
-        expires_in,
-        expires_at,
-        refresh_token,
-        additional_components,
-        date
+        access_token = access_token,
+        token_type = token_type,
+        expires_in = expires_in,
+        expires_at = expires_at,
+        refresh_token = refresh_token,
+        date = date,
+        additional_components = additional_components
     )
 end

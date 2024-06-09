@@ -19,7 +19,7 @@ function req_body_json(req::RequestHTTR, body::AbstractString)
     req.header = ["Accept" => "application/json"]
     req.method = "POST"
 
-    req
+    return req
 end
 
 function req_body_json(req::RequestHTTR, body::Dict)
@@ -29,7 +29,7 @@ end
 function req_method(req::RequestHTTR, method)
    req.method = method    
 
-   req
+   return req
 end
 
 function req_verbose(req::RequestHTTR, verbosity::Int)
@@ -37,7 +37,7 @@ function req_verbose(req::RequestHTTR, verbosity::Int)
 
     req.verbosity = verbosity
 
-    req    
+    return req    
 end
 
 function with_verbosity(req::RequestHTTR)
@@ -48,7 +48,7 @@ function req_retry(req::RequestHTTR, retries::Int)
     req.retries = retries
     req.retry = n > 0 ? true : false
 
-    req
+    return req
 end
 
 function req_perform(req::RequestHTTR)
