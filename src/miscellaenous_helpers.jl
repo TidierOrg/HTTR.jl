@@ -2,12 +2,11 @@
 """
 $curl_translate_docstring
 """
-function curl_translate(cmd::String, simplify_headers::Bool=true)
-
+function curl_translate(cmd::Union{AbstractString,Cmd}, simplify_headers::Bool=true)
+    
 end
 
-const CURL_OPTIONS::String = 
-"""
+const CURL_OPTIONS::String = """
 Usage: curl [<url>] [-H <header> ...] [options] [<url>]
       --basic                  (IGNORED)
       --compressed             (IGNORED)

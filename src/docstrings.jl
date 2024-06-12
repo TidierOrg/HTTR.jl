@@ -1,25 +1,11 @@
+const RequestHTTR_docstring::String =
+"""
+
+"""
 
 const request_docstring::String = 
 """
-    HTTR.request_docstring(base_url::AbstractString)
 
-Create an HTTP request. Without any options, this creates a GET request.
-
-Arguments
-
-- `base_url::AbstractString`: The base URL of the request.
-
-Returns
-
-- `HTTP.Request`: An HTTP request object.
-
-Examples
-
-```jldoctest
-julia> request("https://julialang.org/")
-GET https://julialang.org/
-Body: empty
-```
 """
 
 const req_body_raw_docstring::String = 
@@ -424,14 +410,16 @@ const resp_url_queries_docstring::String =
 
 const curl_translate_docstring::String = 
 """
+    HTTR.curl_translate(cmd, simplify_headers::Bool=true)
 
+Translate curl commands into HTTR functions.
 """
 
 const curl_help_docstring::String = 
 """
     HTTR.curl_help()::String
 
-This function prints out useful information about the `curl` command line tool.
+This function prints out useful information about the curl command line tool.
 """
 
 const secret_make_key_docstring::String = 
@@ -501,7 +489,7 @@ const oauth_cache_path_docstring::String =
 
 """
 
-const oauth_client_struct_docstring::String =
+const OAuthClient_docstring::String =
 """
 
 """
@@ -536,7 +524,7 @@ const oauth_redirect_uri_docstring::String =
 
 """
 
-const oauth_token_struct_docstring::String = 
+const OAuthToken_docstring::String =
 """
 
 """

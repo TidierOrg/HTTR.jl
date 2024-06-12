@@ -2,8 +2,22 @@
 """
 $req_perform_docstring
 """
-function req_perform(req::RequestHTTR; path=nothing, verbosity=nothing)
+function req_perform(req::RequestHTTR)
+    req_attributes::Vector = [
+        req.method, 
+        req.base_url, 
+        req.header, 
+        req.body
+    ]
 
+    filter!(!isnothing, req_attributes)
+
+    return HTTP.request(
+        req_attributes...;
+        retry=req.retry, 
+        retries=req.retries, 
+        verbose=req.verbosity
+    )
 end
 
 """
@@ -59,13 +73,9 @@ end
 """
 $req_retry_docstring
 """
-function req_retry(
-    req::RequestHTTR,
-    max_tries=nothing,
-    max_seconds=nothing,
-    is_transient=nothing,
-    backoff=nothing,
-    after=nothing
-)
+function req_retry(req::RequestHTTR, max_tries::Int)
+    req.retries = max_tries
+    req.retry = n > 0 ? true : false
 
+    return req
 end

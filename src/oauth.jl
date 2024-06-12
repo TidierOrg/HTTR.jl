@@ -13,7 +13,7 @@ function oauth_cache_path()
 end
 
 """
-$oauth_client_struct_docstring
+$OAuthClient_docstring
 """
 @kwdef mutable struct OAuthClient
     id::AbstractString
@@ -30,7 +30,7 @@ $oauth_client_docstring
 """
 function oauth_client(
     id::AbstractString,
-    token_url::AbstractString,;
+    token_url::AbstractString;
     secret::Union{AbstractString,Nothing}=nothing,
     key::Union{AbstractString,Nothing}=nothing,
     auth::Vector{AbstractString}=["body", "header", "jwt_sig"],
@@ -92,7 +92,7 @@ function oauth_redirect_uri()
 end
 
 """
-$oauth_token_struct_docstring
+$OAuthToken_docstring
 """
 @kwdef mutable struct OAuthToken
     access_token::AbstractString

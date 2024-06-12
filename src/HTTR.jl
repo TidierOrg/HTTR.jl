@@ -11,7 +11,7 @@ using URIs
 
 include("docstrings.jl")
 
-include("request.jl")
+include("requests/create_and_modify.jl")
 export
     RequestHTTR,
     request,
@@ -33,14 +33,20 @@ export
     req_url_query,
     req_url_path,
     req_url_path_append,
-    req_user_agent,
+    req_user_agent
+
+include("requests/debugging_and_testing.jl")
+export
     last_response,
     last_request,
     req_dry_run,
     req_verbose,
     with_mocked_responses,
     local_mocked_responses,
-    with_verbosity,
+    with_verbosity
+
+include("requests/authentication.jl")
+export
     req_auth_basic,
     req_auth_bearer_token,
     req_oauth_auth_code,
@@ -125,12 +131,14 @@ export
 include("oauth.jl")
 export
     oauth_cache_path,
+    OAuthClient,
     oauth_client,
     oauth_client_req_auth,
     oauth_client_req_auth_header,
     oauth_client_req_auth_body,
     oauth_client_req_auth_jwt_sig,
     oauth_redirect_uri,
+    OAuthToken,
     oauth_token
 
 end

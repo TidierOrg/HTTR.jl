@@ -105,7 +105,7 @@ end
 $resp_header_exists_docstring
 """
 function resp_header_exists(resp::HTTP.Response, header::AbstractString)::Bool
-    header_lower = lowercase(header)
+    header_lower::String = lowercase(header)
 
     for pair in resp.headers
         if lowercase(pair.first) == header_lower
