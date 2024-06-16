@@ -2,7 +2,7 @@
 """
 $curl_translate_docstring
 """
-function curl_translate(cmd::Union{AbstractString,Cmd}, simplify_headers::Bool=true)
+function curl_translate(cmd::Union{AbstractString,Cmd}; simplify_headers::Bool=true)
 
 end
 
@@ -157,12 +157,12 @@ function url_build(url::AbstractDict)::String
     fragment::String = url["fragment"]
     query::String = url["query"]
 
-    return string(URI(
+    return URI(
         scheme=scheme, 
         userinfo=userinfo, 
         host=host, 
         port=port, 
         path=path, 
         fragment=fragment, 
-        query=queryparampairs(query)))
+        query=queryparampairs(query)) |> string
 end

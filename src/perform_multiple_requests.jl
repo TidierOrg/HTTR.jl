@@ -24,7 +24,7 @@ end
 $iterate_with_offset_docstring
 """
 function iterate_with_offset(
-    param_name::AbstractString,
+    param_name::AbstractString;
     start::Int=1,
     offset::Int=1,
     resp_pages::Function=nothing,

@@ -2,7 +2,7 @@
 """
 $req_perform_docstring
 """
-function req_perform(req::RequestHTTR)
+function req_perform(req::HTTR.Request)::HTTP.Messages.Response
     req_attributes::Vector = [
         req.method,
         req.base_url,
@@ -12,20 +12,22 @@ function req_perform(req::RequestHTTR)
 
     filter!(!isnothing, req_attributes)
 
-    return HTTP.request(
-        req_attributes...;
+    http_request::HTTP.Messages.Response = HTTP.request(
+        req_attributes...,
         retry=req.retry,
         retries=req.retries,
         verbose=req.verbosity
     )
+
+    return http_request
 end
 
 """
 $req_perform_stream_docstring
 """
 function req_perform_stream(
-    req::RequestHTTR,
-    callback,
+    req::HTTR.Request,
+    callback;
     timeout_sec::Number=Inf,
     buffer_kb::Number=64,
     round::Vector{AbstractString}=["byte", "line"]
@@ -37,8 +39,8 @@ end
 $req_cache_docstring
 """
 function req_cache(
-    req::RequestHTTR,
-    path,
+    req::HTTR.Request,
+    path;
     use_on_error::Bool=false,
     debug::Bool=false,
     max_age::Number=Inf,
@@ -52,7 +54,7 @@ end
 $req_error_docstring
 """
 function req_error(
-    req::RequestHTTR,
+    req::HTTR.Request;
     is_error::Bool=false,
     body=nothing
 )
@@ -63,8 +65,8 @@ end
 $req_throttle_docstring
 """
 function req_throttle(
-    req::RequestHTTR,
-    rate::Number,
+    req::HTTR.Request,
+    rate::Number;
     realm=nothing
 )
 
@@ -73,7 +75,7 @@ end
 """
 $req_retry_docstring
 """
-function req_retry(req::RequestHTTR, max_tries::Int)
+function req_retry(req::HTTR.Request; max_tries::Int)
     req.retries = max_tries
     req.retry = n > 0 ? true : false
 

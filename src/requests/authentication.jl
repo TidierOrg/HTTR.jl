@@ -2,7 +2,7 @@
 """
 $req_auth_basic_docstring
 """
-function req_auth_basic(req::RequestHTTR, username::AbstractString; password::AbstractString="")
+function req_auth_basic(req::HTTR.Request, username::AbstractString; password::AbstractString="")
 
 end
 

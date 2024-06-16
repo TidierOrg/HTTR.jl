@@ -16,7 +16,7 @@ end
 """
 $req_dry_run_docstring
 """
-function req_dry_run(req::RequestHTTR; quiet::Bool=false, redact_headers::Bool=true)
+function req_dry_run(req::HTTR.Request; quiet::Bool=false, redact_headers::Bool=true)
     if quiet
         return ""
     end
@@ -31,7 +31,7 @@ end
 """
 $req_verbose_docstring
 """
-function req_verbose(req::RequestHTTR, verbosity::Int)
+function req_verbose(req::HTTR.Request, verbosity::Int)
     verbosity >= 0 || verbosity <= 3 || throw("verbosity must be 0, 1 or 2")
     req.verbosity = verbosity
 
@@ -55,6 +55,6 @@ end
 """
 $with_verbosity_docstring
 """
-function with_verbosity(req::RequestHTTR)
+function with_verbosity(req::HTTR.Request)
     return req_verbose(req, 2)
 end

@@ -3,7 +3,7 @@
 $resp_body_raw_docstring
 """
 function resp_body_raw(resp::HTTP.Messages.Response)::Vector{UInt8}
-    return copy(resp.body)
+    return resp.body
 end
 
 """
@@ -23,24 +23,21 @@ end
 """
 $resp_body_json_docstring
 """
-function resp_body_json(resp::HTTP.Messages.Response; kwargs...)::Dict
-    body_copy::Vector{UInt8} = copy(resp.body)
-    body_string::String = String(body_copy)
-
-    return JSON3.read(body_string, Dict; kwargs...)
+function resp_body_json(resp::HTTP.Messages.Response)::Dict
+    return JSON3.read(resp_body_string(resp), Dict)
 end
 
 """
 $resp_body_html_docstring
 """
-function resp_body_html(resp::HTTP.Messages.Response; kwargs...)
+function resp_body_html(resp::HTTP.Messages.Response)
     # if type isnt html, return error
 end
 
 """
 $resp_body_xml_docstring
 """
-function resp_body_xml(resp::HTTP.Messages.Response; kwargs...)
+function resp_body_xml(resp::HTTP.Messages.Response)
     # if type isnt xml, return error
 end
 
@@ -81,7 +78,7 @@ function resp_date(resp::HTTP.Messages.Response)::DateTime
     end
 
     try
-        return DateTime(date_str, dateformat"ddd, dd MMM yyyy HH:MM:SS UTC")
+        return DateTime(date_str, "ddd, dd MMM yyyy HH:MM:SS UTC")
     catch
         return error("Failed to parse Date header: $date_str")
     end
@@ -164,7 +161,7 @@ end
 """
 $resp_status_docstring
 """
-function resp_status(resp::HTTP.Messages.Response)::Int
+function resp_status(resp::HTTP.Messages.Response)::Int16
     return resp.status
 end
 
@@ -179,7 +176,7 @@ end
 $resp_is_error_docstring
 """
 function resp_is_error(resp::HTTP.Messages.Response)::Bool
-    status_code = resp.status
+    status_code::Int16 = resp.status
 
     return status_code >= 400 && status_code < 600
 end

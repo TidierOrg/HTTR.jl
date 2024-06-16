@@ -51,28 +51,28 @@ end
 """
 $oauth_client_req_auth_docstring
 """
-function oauth_client_req_auth(req::RequestHTTR, client::OAuthClient)
+function oauth_client_req_auth(req::HTTR.Request, client::OAuthClient)
 
 end
 
 """
 $oauth_client_req_auth_header_docstring
 """
-function oauth_client_req_auth_header(req::RequestHTTR, client::OAuthClient)
+function oauth_client_req_auth_header(req::HTTR.Request, client::OAuthClient)
 
 end
 
 """
 $oauth_client_req_auth_body_docstring
 """
-function oauth_client_req_auth_body(req::RequestHTTR, client::OAuthClient)
+function oauth_client_req_auth_body(req::HTTR.Request, client::OAuthClient)
 
 end
 
 """
 $oauth_client_req_auth_jwt_sig_docstring
 """
-function oauth_client_req_auth_jwt_sig(req::RequestHTTR, client::OAuthClient; claim, size::Int=256, header)
+function oauth_client_req_auth_jwt_sig(req::HTTR.Request, client::OAuthClient; claim, size::Int=256, header)
 
 end
 
@@ -105,7 +105,7 @@ end
 $oauth_token_docstring
 """
 function oauth_token(
-    access_token::AbstractString,
+    access_token::AbstractString;
     token_type::AbstractString="bearer",
     expires_in::Union{Nothing,Int}=nothing,
     refresh_token::Union{Nothing,AbstractString}=nothing,

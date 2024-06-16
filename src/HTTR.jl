@@ -22,7 +22,7 @@ include("docstrings.jl")
 
 include("requests/create_and_modify.jl")
 export
-    RequestHTTR,
+    Request,
     request,
     req_body_raw,
     req_body_file,
@@ -55,7 +55,7 @@ export
     with_verbosity
 
 #include("requests/authentication.jl")
-    #export
+#export
     #req_auth_basic
     #req_auth_bearer_token,
     #req_oauth_auth_code,

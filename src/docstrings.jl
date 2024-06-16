@@ -1,4 +1,4 @@
-const RequestHTTR_docstring::String =
+const Request_docstring::String =
 """
 
 """
