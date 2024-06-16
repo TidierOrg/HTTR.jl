@@ -439,12 +439,12 @@ const secret_decrypt_docstring::String =
 
 """
 
-const secret_write_rds_docstring::String = 
+const secret_write_jld_docstring::String = 
 """
 
 """
 
-const secret_read_rds_docstring::String = 
+const secret_read_jld_docstring::String = 
 """
 
 """

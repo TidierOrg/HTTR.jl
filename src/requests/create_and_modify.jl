@@ -16,36 +16,52 @@ end
 $request_docstring
 """
 function request(base_url::AbstractString)
-    return RequestHTTR(base_url = base_url)
+    return RequestHTTR(base_url=base_url)
 end
 
 """
 $req_body_raw_docstring
 """
-function req_body_raw(req::RequestHTTR, body::AbstractString; type = nothing)
+function req_body_raw(req::RequestHTTR, body::Union{AbstractString,Vector{UInt8}}; type=nothing)
+    req.body = body
+    req.method = "POST"
+    req.header = Dict("Content-Type" => type)
 
+    return req
 end
 
 """
 $req_body_file_docstring
 """
-function req_body_file(req::RequestHTTR, path::AbstractString; type = nothing)
+function req_body_file(req::RequestHTTR, path::AbstractString; type=nothing)
+    body::String = Base.read(path, String)
+    req.body = body
+    req.method = "POST"
+    req.header = Dict("Content-Type" => type)
 
+    return req
 end
 
 """
 $req_body_json_docstring
 """
-function req_body_json(req::RequestHTTR, body::AbstractString)
-    req.body = body
+function req_body_json(req::RequestHTTR, data::AbstractString)
+    req.body = data
     req.header = ["Accept" => "application/json"]
     req.method = "POST"
 
     return req
 end
 
-function req_body_json(req::RequestHTTR, body::AbstractDict)
-    return req_body_json(req, body |> JSON3.write)
+function req_body_json(req::RequestHTTR, data::AbstractDict; kwargs...)
+    return req_body_json(req, JSON3.write(data, kwargs...))
+end
+
+"""
+$req_body_json_modify_docstring
+"""
+function req_body_json_modify(req::RequestHTTR, data::AbstractString)
+
 end
 
 """
@@ -72,15 +88,17 @@ end
 """
 $req_headers_docstring
 """
-function req_headers(req::RequestHTTR; redact::Bool=false)
+function req_headers(req::RequestHTTR; headers::Dict{String,String}=Dict(), redact::Bool=false)
+    req.header = merge(req.header, headers)
 
+    return req
 end
 
 """
 $req_method_docstring
 """
 function req_method(req::RequestHTTR, method::AbstractString)
-    method = Base.uppercase(method)
+    method = uppercase(method)
     req.method = method
 
     return req
@@ -162,5 +180,7 @@ end
 $req_user_agent_docstring
 """
 function req_user_agent(req::RequestHTTR, user_agent::AbstractString)
+    req.header = merge(req.header, Dict("User-Agent" => user_agent))
 
+    return req
 end

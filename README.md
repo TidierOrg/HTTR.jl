@@ -1,3 +1,5 @@
+# HTTR.jl
+
 HTTR.jl, completed functions: 
 
 - `resp_url()`
@@ -9,34 +11,40 @@ HTTR.jl, completed functions:
 
 TODO (not sure if we need all of these yet)
 
-### request
-- [ ] request()
+## requests
+
+### create and modify
+- [x] request()
 - [ ] req_body_raw()
 - [ ] req_body_file()
-- [ ] req_body_json()
+- [x] req_body_json()
 - [ ] req_body_json_modify()
 - [ ] req_body_form()
 - [ ] req_body_multipart()
 - [ ] req_cookie_preserve()
 - [ ] req_headers()
-- [ ] req_method()
+- [x] req_method()
 - [ ] req_options()
 - [ ] req_progress()
 - [ ] req_proxy()
 - [ ] req_template()
 - [ ] req_timeout()
-- [ ] req_url()
+- [x] req_url()
 - [ ] req_url_query()
 - [ ] req_url_path()
 - [ ] req_url_path_append()
 - [ ] req_user_agent()
+
+### debugging/testing
 - [ ] last_response()
 - [ ] last_request()
 - [ ] req_dry_run()
-- [ ] req_verbose()
+- [x] req_verbose()
 - [ ] with_mocked_responses()
 - [ ] local_mocked_responses()
-- [ ] with_verbosity()
+- [x] with_verbosity()
+
+### authentication
 - [ ] req_auth_basic()
 - [ ] req_auth_bearer_token()
 - [ ] req_oauth_auth_code()
@@ -52,15 +60,15 @@ TODO (not sure if we need all of these yet)
 - [ ] req_oauth_refresh()
 - [ ] oauth_flow_refresh()
 
-### perform a request
-- [ ] req_perform()
+## perform a request
+- [x] req_perform()
 - [ ] req_perform_stream()
 - [ ] req_cache()
 - [ ] req_error()
 - [ ] req_throttle()
 - [ ] req_retry()
 
-### perform multiple requests
+## perform multiple requests
 - [ ] req_perform_iterative()
 - [ ] req_perform_parallel()
 - [ ] req_perform_sequential()
@@ -72,7 +80,7 @@ TODO (not sure if we need all of these yet)
 - [ ] resps_requests()
 - [ ] resps_data()
 
-### responses
+## responses
 - [ ] resp_body_raw()
 - [ ] resp_has_body()
 - [ ] resp_body_string()
@@ -98,7 +106,7 @@ TODO (not sure if we need all of these yet)
 - [x] resp_url_query()
 - [x] resp_url_queries()
 
-### miscellaenous helper
+## miscellaenous helper
 - [ ] curl_translate()
 - [x] curl_help()
 - [x] secret_make_key()
@@ -114,7 +122,7 @@ TODO (not sure if we need all of these yet)
 - [x] url_parse()
 - [x] url_build()
 
-### oauth
+## oauth
 - [ ] oauth_cache_path()
 - [ ] oauth_client()
 - [ ] oauth_client_req_auth()

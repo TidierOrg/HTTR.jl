@@ -4,9 +4,9 @@ $req_perform_docstring
 """
 function req_perform(req::RequestHTTR)
     req_attributes::Vector = [
-        req.method, 
-        req.base_url, 
-        req.header, 
+        req.method,
+        req.base_url,
+        req.header,
         req.body
     ]
 
@@ -14,8 +14,8 @@ function req_perform(req::RequestHTTR)
 
     return HTTP.request(
         req_attributes...;
-        retry=req.retry, 
-        retries=req.retries, 
+        retry=req.retry,
+        retries=req.retries,
         verbose=req.verbosity
     )
 end

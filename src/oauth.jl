@@ -21,7 +21,7 @@ $OAuthClient_docstring
     secret::Union{AbstractString,Nothing} = nothing
     key::Union{AbstractString,Nothing} = nothing
     auth::Vector{AbstractString} = ["body", "header", "jwt_sig"]
-    auth_params::Dict{AbstractString,Any} = Dict()
+    auth_params::AbstractDict = Dict()
     name::AbstractString = Base.hash(id)
 end
 
@@ -34,18 +34,16 @@ function oauth_client(
     secret::Union{AbstractString,Nothing}=nothing,
     key::Union{AbstractString,Nothing}=nothing,
     auth::Vector{AbstractString}=["body", "header", "jwt_sig"],
-    auth_params::Dict{AbstractString,Any}=Dict(),
-    name::String=Base.hash(id)
-
-)::OAuthClient
+    auth_params::AbstractDict=Dict(),
+    name::String=Base.hash(id))::OAuthClient
 
     return OAuthClient(
-        id=id, 
-        token_url=token_url, 
-        secret=secret, 
-        key=key, 
-        auth=auth, 
-        auth_params=auth_params, 
+        id=id,
+        token_url=token_url,
+        secret=secret,
+        key=key,
+        auth=auth,
+        auth_params=auth_params,
         name=name
     )
 end
@@ -97,10 +95,10 @@ $OAuthToken_docstring
 @kwdef mutable struct OAuthToken
     access_token::AbstractString
     token_type::AbstractString = "bearer"
-    expires_in::Union{Nothing,Int}=nothing
-    refresh_token::Union{Nothing,String}=nothing
-    date::DateTime=Dates.now()
-    additional_components::Dict{String,Any} = Dict()
+    expires_in::Union{Nothing,Int} = nothing
+    refresh_token::Union{Nothing,AbstractString} = nothing
+    date::DateTime = now()
+    additional_components::AbstractDict = Dict()
 end
 
 """
@@ -108,25 +106,25 @@ $oauth_token_docstring
 """
 function oauth_token(
     access_token::AbstractString,
-    token_type::AbstractString = "bearer",
+    token_type::AbstractString="bearer",
     expires_in::Union{Nothing,Int}=nothing,
-    refresh_token::Union{Nothing,String}=nothing,
-    date::DateTime=Dates.now(),
-    additional_components::Dict{String,Any}=Dict(),
-)
+    refresh_token::Union{Nothing,AbstractString}=nothing,
+    date::DateTime=now(),
+    additional_components::AbstractDict=Dict())::OAuthToken
+
     if expires_in === nothing
         expires_at = nothing
     else
-        expires_at::DateTime = date + Dates.Second(expires_in)
+        expires_at = date + Second(expires_in)
     end
 
     return OAuthToken(
-        access_token = access_token,
-        token_type = token_type,
-        expires_in = expires_in,
-        expires_at = expires_at,
-        refresh_token = refresh_token,
-        date = date,
-        additional_components = additional_components
+        access_token=access_token,
+        token_type=token_type,
+        expires_in=expires_in,
+        expires_at=expires_at,
+        refresh_token=refresh_token,
+        date=date,
+        additional_components=additional_components
     )
 end
