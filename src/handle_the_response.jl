@@ -28,7 +28,7 @@ function resp_body_json(resp::HTTP.Messages.Response; check_type::Bool=true, kwa
         resp_check_content_type(resp, ["application/json", "text/json"])
     end
 
-    return JSON3.read(resp_body_string(resp), Dict, kwargs...)
+    return JSON3.read(resp_body_string(resp), Dict; kwargs...)
 end
 
 """
@@ -39,7 +39,7 @@ function resp_body_html(resp::HTTP.Messages.Response; check_type::Bool=true, kwa
         resp_check_content_type(resp, ["text/html"])
     end
 
-    return parsehtml(resp_body_string(resp), kwargs...)
+    return EzXML.parsehtml(resp_body_string(resp); kwargs...)
 end
 
 """
@@ -50,7 +50,7 @@ function resp_body_xml(resp::HTTP.Messages.Response; check_type::Bool=true, kwar
         resp_check_content_type(resp, ["application/xml", "text/xml"])
     end
 
-    return parsexml(resp_body_string(resp), kwargs...)
+    return EzXML.parsexml(resp_body_string(resp); kwargs...)
 end
 
 """

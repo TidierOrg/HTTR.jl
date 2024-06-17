@@ -8,16 +8,16 @@ module HTTR
 using Chain
 export @chain
 
-using Base64: base64encode, base64decode
-using Dates: DateTime, now, Second, @dateformat_str
-using EzXML: parsehtml, parsexml
+using Base64
+using Dates
+using EzXML
 using HTTP
-using JLD2: save_object, load_object
-using JSON3: read, write
+using JLD2
+using JSON3
 using libsodium_jll
 using ProgressMeter
-using Random: randstring
-using URIs: URI, queryparams, queryparampairs
+using Random
+using URIs
 
 include("docstrings.jl")
 
@@ -47,8 +47,8 @@ export
 
 include("requests/debugging_and_testing.jl")
 export
-    #last_response,
-    #last_request,
+    last_response,
+    last_request,
     #req_dry_run,
     req_verbose,
     #with_mocked_responses,
@@ -57,7 +57,7 @@ export
 
 #include("requests/authentication.jl")
 #export
-    #req_auth_basic
+    #req_auth_basic,
     #req_auth_bearer_token,
     #req_oauth_auth_code,
     #oauth_flow_auth_code,
@@ -134,6 +134,7 @@ export
     #secret_encrypt_file,
     secret_has_key,
     #obfuscate,
+    #Obfuscated,
     #obfuscated,
     url_parse,
     url_build

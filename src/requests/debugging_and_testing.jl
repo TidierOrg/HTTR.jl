@@ -1,16 +1,28 @@
 # debugging_and_testing.jl
+const LAST_RESPONSE = Ref{Union{Nothing,HTTP.Messages.Response}}(nothing)
+
+function update_last_response(resp::HTTP.Messages.Response)
+    return LAST_RESPONSE[] = resp
+end
+
 """
 $last_response_docstring
 """
 function last_response()
+    return LAST_RESPONSE[]
+end
 
+const LAST_REQUEST = Ref{Union{Nothing,HTTR.Request}}(nothing)
+
+function update_last_request(req::HTTR.Request)
+    return LAST_REQUEST[] = req
 end
 
 """
 $last_request_docstring
 """
 function last_request()
-
+    return LAST_REQUEST[]
 end
 
 """

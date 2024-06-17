@@ -43,7 +43,7 @@ end
 $secret_make_key_docstring
 """
 function secret_make_key()::String
-    return randstring(16)
+    return Random.randstring(16)
 end
 
 """
@@ -123,6 +123,13 @@ function obfuscate(x::AbstractString)
 end
 
 """
+$Obfuscated_docstring
+"""
+struct Obfuscated
+    value::AbstractString
+end
+
+"""
 $obfuscated_docstring
 """
 function obfuscated(x::AbstractString)
@@ -158,11 +165,11 @@ function url_build(url::AbstractDict)::String
     query::String = url["query"]
 
     return URI(
-        scheme=scheme, 
-        userinfo=userinfo, 
-        host=host, 
-        port=port, 
-        path=path, 
-        fragment=fragment, 
+        scheme=scheme,
+        userinfo=userinfo,
+        host=host,
+        port=port,
+        path=path,
+        fragment=fragment,
         query=queryparampairs(query)) |> string
 end

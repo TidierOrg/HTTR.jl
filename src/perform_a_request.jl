@@ -12,14 +12,17 @@ function req_perform(req::HTTR.Request)::HTTP.Messages.Response
 
     filter!(!isnothing, req_attributes)
 
-    http_request::HTTP.Messages.Response = HTTP.request(
+    resp::HTTP.Messages.Response = HTTP.request(
         req_attributes...,
         retry=req.retry,
         retries=req.retries,
         verbose=req.verbosity
     )
 
-    return http_request
+    update_last_request(req)
+    update_last_response(resp)
+
+    return resp
 end
 
 """

@@ -29,8 +29,8 @@ TODO (not sure if we need all of these yet)
 - [x] req_user_agent()
 
 #### debugging/testing
-- [ ] last_response()
-- [ ] last_request()
+- [x] last_response()
+- [x] last_request()
 - [ ] req_dry_run()
 - [x] req_verbose()
 - [ ] with_mocked_responses()

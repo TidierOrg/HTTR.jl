@@ -469,6 +469,11 @@ const obfuscate_docstring::String =
 
 """
 
+const Obfuscated_docstring::String =
+"""
+
+"""
+
 const obfuscated_docstring::String = 
 """
 
