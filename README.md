@@ -38,8 +38,8 @@ TODO (not sure if we need all of these yet)
 - [x] with_verbosity()
 
 #### authentication
-- [ ] req_auth_basic()
-- [ ] req_auth_bearer_token()
+- [x] req_auth_basic()
+- [x] req_auth_bearer_token()
 - [ ] req_oauth_auth_code()
 - [ ] oauth_flow_auth_code()
 - [ ] req_oauth_bearer_jwt()

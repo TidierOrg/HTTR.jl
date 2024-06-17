@@ -10,6 +10,7 @@ $Request_docstring
     verbosity::Int = 0
     retries::Int = 0
     retry::Bool = false
+    progress::Bool = false
     proxy::AbstractDict = Dict()
 end
 
@@ -35,7 +36,7 @@ $req_body_raw_docstring
 """
 function req_body_raw(
     req::HTTR.Request,
-    body::Union{AbstractString,Vector{UInt8}};
+    body::Union{AbstractString,AbstractVector};
     type::AbstractString="")::HTTR.Request
 
     req.method = "POST"

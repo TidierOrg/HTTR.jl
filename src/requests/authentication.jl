@@ -2,15 +2,29 @@
 """
 $req_auth_basic_docstring
 """
-function req_auth_basic(req::HTTR.Request, username::AbstractString; password::AbstractString="")
+function req_auth_basic(req::HTTR.Request, username::AbstractString; password::AbstractString="")::HTTR.Request
+    if password == ""
+        println("Enter password: ")
+        password::String = readline()
+    end
 
+    credentials::String = base64encode("$username:$password")
+    authorization_header::String = "Basic $credentials"
+
+    req.headers = merge_headers(req.headers, ["Authorization" => authorization_header])
+
+    return req
 end
 
 """
 $req_auth_bearer_token_docstring
 """
-function req_auth_bearer_token()
+function req_auth_bearer_token(req::HTTR.Request, token::AbstractString)::HTTR.Request
+    authorization_header::String = "Bearer $token"
 
+    req.headers = merge_headers(req.headers, ["Authorization" => authorization_header])
+
+    return req
 end
 
 """

@@ -33,7 +33,7 @@ function req_perform_stream(
     callback;
     timeout_sec::Number=Inf,
     buffer_kb::Number=64,
-    round::Vector{AbstractString}=["byte", "line"]
+    round::AbstractString="line"
 )
 
 end
@@ -43,7 +43,7 @@ $req_cache_docstring
 """
 function req_cache(
     req::HTTR.Request,
-    path;
+    path::AbstractString;
     use_on_error::Bool=false,
     debug::Bool=false,
     max_age::Number=Inf,
@@ -78,7 +78,7 @@ end
 """
 $req_retry_docstring
 """
-function req_retry(req::HTTR.Request; max_tries::Int)
+function req_retry(req::HTTR.Request; max_tries::Int)::HTTR.Request
     req.retries = max_tries
     req.retry = n > 0 ? true : false
 

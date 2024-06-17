@@ -5,19 +5,7 @@ Julia port of [httr2](https://github.com/r-lib/httr2)
 """
 module HTTR
 
-using Chain
-export @chain
-
-using Base64
-using Dates
-using EzXML
-using HTTP
-using JLD2
-using JSON3
-using libsodium_jll
-using ProgressMeter
-using Random
-using URIs
+using Chain, Base64, Dates, EzXML, HTTP, JLD2, JSON3, libsodium_jll, ProgressMeter, Random, URIs
 
 include("docstrings.jl")
 
@@ -55,10 +43,10 @@ export
     #local_mocked_responses,
     with_verbosity
 
-#include("requests/authentication.jl")
-#export
-    #req_auth_basic,
-    #req_auth_bearer_token,
+include("requests/authentication.jl")
+export
+    req_auth_basic
+    req_auth_bearer_token,
     #req_oauth_auth_code,
     #oauth_flow_auth_code,
     #req_oauth_bearer_jwt,
@@ -128,8 +116,8 @@ export
     secret_make_key,
     secret_encrypt,
     secret_decrypt,
-    secret_write_jld, # secret_write_rds
-    secret_read_jld, # secret_read_rds
+    secret_write_jld,
+    secret_read_jld,
     #secret_decrypt_file,
     #secret_encrypt_file,
     secret_has_key,
