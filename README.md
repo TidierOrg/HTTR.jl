@@ -1,19 +1,12 @@
 # HTTR.jl
 
-HTTR.jl, completed functions: 
-
-- `resp_url()`
-- `resp_url_path()`
-- `resp_url_query()`
-- `resp_url_queries()`
-- `url_parse()`
-- `url_build()`
+## Supported functions:
 
 TODO (not sure if we need all of these yet)
 
-## requests
+### requests
 
-### create and modify
+#### create and modify
 - [x] request()
 - [x] req_body_raw()
 - [x] req_body_file()
@@ -28,14 +21,14 @@ TODO (not sure if we need all of these yet)
 - [ ] req_progress()
 - [ ] req_proxy()
 - [ ] req_template()
-- [ ] req_timeout()
+- [x] req_timeout()
 - [x] req_url()
 - [ ] req_url_query()
 - [ ] req_url_path()
 - [ ] req_url_path_append()
 - [x] req_user_agent()
 
-### debugging/testing
+#### debugging/testing
 - [ ] last_response()
 - [ ] last_request()
 - [ ] req_dry_run()
@@ -44,7 +37,7 @@ TODO (not sure if we need all of these yet)
 - [ ] local_mocked_responses()
 - [x] with_verbosity()
 
-### authentication
+#### authentication
 - [ ] req_auth_basic()
 - [ ] req_auth_bearer_token()
 - [ ] req_oauth_auth_code()
@@ -60,7 +53,7 @@ TODO (not sure if we need all of these yet)
 - [ ] req_oauth_refresh()
 - [ ] oauth_flow_refresh()
 
-## perform a request
+### perform a request
 - [x] req_perform()
 - [ ] req_perform_stream()
 - [ ] req_cache()
@@ -68,7 +61,7 @@ TODO (not sure if we need all of these yet)
 - [ ] req_throttle()
 - [x] req_retry()
 
-## perform multiple requests
+### perform multiple requests
 - [ ] req_perform_iterative()
 - [ ] req_perform_parallel()
 - [ ] req_perform_sequential()
@@ -80,33 +73,33 @@ TODO (not sure if we need all of these yet)
 - [ ] resps_requests()
 - [ ] resps_data()
 
-## responses
+### responses
 - [x] resp_body_raw()
 - [x] resp_has_body()
 - [x] resp_body_string()
 - [x] resp_body_json()
 - [x] resp_body_html()
 - [x] resp_body_xml()
-- [ ] resp_check_content_type()
+- [x] resp_check_content_type()
 - [x] resp_content_type()
-- [ ] resp_encoding()
+- [x] resp_encoding()
 - [x] resp_date()
 - [x] resp_headers()
 - [x] resp_header()
 - [x] resp_header_exists()
-- [ ] resp_link_url()
-- [ ] resp_raw()
+- [x] resp_link_url()
+- [x] resp_raw()
 - [x] resp_retry_after()
 - [x] resp_status()
-- [ ] resp_status_desc()
+- [x] resp_status_desc()
 - [x] resp_is_error()
-- [ ] resp_check_status()
+- [x] resp_check_status()
 - [x] resp_url()
 - [x] resp_url_path()
 - [x] resp_url_query()
 - [x] resp_url_queries()
 
-## miscellaenous helper
+### miscellaenous helper
 - [ ] curl_translate()
 - [x] curl_help()
 - [x] secret_make_key()
@@ -122,7 +115,7 @@ TODO (not sure if we need all of these yet)
 - [x] url_parse()
 - [x] url_build()
 
-## oauth
+### oauth
 - [x] oauth_cache_path()
 - [x] oauth_client()
 - [ ] oauth_client_req_auth()

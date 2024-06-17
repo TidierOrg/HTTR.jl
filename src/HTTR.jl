@@ -8,15 +8,16 @@ module HTTR
 using Chain
 export @chain
 
-using Base64
-using Dates: DateTime, now, Second
-using EzXML: readhtml, readxml
+using Base64: base64encode, base64decode
+using Dates: DateTime, now, Second, @dateformat_str
+using EzXML: parsehtml, parsexml
 using HTTP
 using JLD2: save_object, load_object
-using JSON3
+using JSON3: read, write
 using libsodium_jll
+using ProgressMeter
 using Random: randstring
-using URIs: URI, queryparams
+using URIs: URI, queryparams, queryparampairs
 
 include("docstrings.jl")
 
@@ -37,7 +38,7 @@ export
     #req_progress,
     #req_proxy,
     #req_template,
-    #req_timeout,
+    req_timeout,
     req_url,
     #req_url_query,
     #req_url_path,
@@ -101,20 +102,20 @@ export
     resp_body_json,
     resp_body_html,
     resp_body_xml,
-    #resp_check_content_type,
-    #resp_content_type,
-    #resp_encoding,
+    resp_check_content_type,
+    resp_content_type,
+    resp_encoding,
     resp_date,
     resp_headers,
     resp_header,
     resp_header_exists,
-    #resp_link_url,
+    resp_link_url,
     resp_raw,
     resp_retry_after,
     resp_status,
-    #resp_status_desc,
+    resp_status_desc,
     resp_is_error,
-    #resp_check_status,
+    resp_check_status,
     resp_url,
     resp_url_path,
     resp_url_query,

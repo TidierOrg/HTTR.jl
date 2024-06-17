@@ -6,7 +6,7 @@ $Request_docstring
     base_url::AbstractString = ""
     method::AbstractString = "GET"
     body::Any = nothing
-    header::AbstractDict = Dict()
+    headers::AbstractVector = []
     verbosity::Int = 0
     retries::Int = 0
     retry::Bool = false
@@ -19,13 +19,27 @@ function request(base_url::AbstractString)::HTTR.Request
     return HTTR.Request(base_url=base_url)
 end
 
+function merge_headers(old_headers::AbstractVector, new_headers::AbstractVector)
+    header_dict::Dict = Dict(old_headers)
+
+    for (header, header_value) in new_headers
+        header_dict[header] = header_value
+    end
+
+    return collect(header_dict)
+end
+
 """
 $req_body_raw_docstring
 """
-function req_body_raw(req::HTTR.Request, body::Union{AbstractString,Vector{UInt8}}; type=nothing)
-    req.body = body
+function req_body_raw(req::HTTR.Request, body::Union{AbstractString,Vector{UInt8}}; type::AbstractString="")
     req.method = "POST"
-    req.header = Dict("Content-Type" => type)
+
+    if type !== ""
+        req.headers = merge_headers(req.headers, ["Content-Type" => type])
+    end
+
+    req.body = body
 
     return req
 end
@@ -33,11 +47,14 @@ end
 """
 $req_body_file_docstring
 """
-function req_body_file(req::HTTR.Request, path::AbstractString; type=nothing)
-    body::String = Base.read(path, String)
-    req.body = body
+function req_body_file(req::HTTR.Request, path::AbstractString; type::AbstractString="")
     req.method = "POST"
-    req.header = Dict("Content-Type" => type)
+
+    if type !== ""
+        req.headers = merge_headers(req.headers, ["Content-Type" => type])
+    end
+    
+    req.body = Base.read(path, String)
 
     return req
 end
@@ -45,16 +62,20 @@ end
 """
 $req_body_json_docstring
 """
-function req_body_json(req::HTTR.Request, data::AbstractString)
-    req.body = data
-    req.header = ["Accept" => "application/json"]
+function req_body_json(req::HTTR.Request, data::AbstractString; type::AbstractString="application/json")
     req.method = "POST"
+
+    if type !== ""
+        req.headers = merge_headers(req.headers, ["Content-Type" => type])
+    end
+
+    req.body = data
 
     return req
 end
 
-function req_body_json(req::HTTR.Request, data::AbstractDict)
-    return req_body_json(req, JSON3.write(data))
+function req_body_json(req::HTTR.Request, data::AbstractDict; type::AbstractString="application/json")
+    return req_body_json(req, JSON3.write(data), type=type)
 end
 
 """
@@ -88,8 +109,12 @@ end
 """
 $req_headers_docstring
 """
-function req_headers(req::HTTR.Request, headers::AbstractDict=Dict(); redact::Bool=false)
-    req.header = merge(req.header, headers)
+function req_headers(req::HTTR.Request, headers::AbstractVector; redact::Bool=false)
+    if redact
+        headers::Vector = [h for h in headers if !(h[1] in Set(["Authorization", "Cookie"]))]
+    end
+
+    req.headers = merge_headers(req.headers, headers)
 
     return req
 end
@@ -98,8 +123,7 @@ end
 $req_method_docstring
 """
 function req_method(req::HTTR.Request, method::AbstractString)
-    method = uppercase(method)
-    req.method = method
+    req.method = uppercase(method)
 
     return req
 end
@@ -143,7 +167,9 @@ end
 $req_timeout_docstring
 """
 function req_timeout(req::HTTR.Request, seconds::Int)
+    req.headers = merge_headers(req.headers, ["timeout_ms" => string(seconds * 1000)])
 
+    return req
 end
 
 """
@@ -180,7 +206,7 @@ end
 $req_user_agent_docstring
 """
 function req_user_agent(req::HTTR.Request, user_agent::AbstractString)
-    req.header = merge(req.header, Dict("User-Agent" => user_agent))
+    req.headers = merge_headers(req.headers, ["User-Agent" => user_agent])
 
     return req
 end

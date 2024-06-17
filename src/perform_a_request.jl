@@ -6,7 +6,7 @@ function req_perform(req::HTTR.Request)::HTTP.Messages.Response
     req_attributes::Vector = [
         req.method,
         req.base_url,
-        req.header,
+        req.headers,
         req.body
     ]
 
