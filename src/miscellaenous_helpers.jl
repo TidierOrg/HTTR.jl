@@ -50,32 +50,26 @@ end
 $secret_encrypt_docstring
 """
 function secret_encrypt(x::AbstractString, key::AbstractString)::String
-    plaintext::Vector{UInt8} = string_to_bytes(x)
-    key_bytes::Vector{UInt8} = string_to_bytes(key)
-    encrypted::Vector{UInt8} = encrypt_secretbox(plaintext, key_bytes)
-    return bytes_to_string(Base64.base64encode(encrypted))
+    #TODO 
 end
 
 """
 $secret_decrypt_docstring
 """
 function secret_decrypt(encrypted::AbstractString, key::AbstractString)::String
-    encrypted_bytes::Vector{UInt8} = Base64.base64decode(string_to_bytes(encrypted))
-    decrypted_bytes::Vector{UInt8} = decrypt_secretbox(encrypted_bytes, string_to_bytes(key))
-    return bytes_to_string(decrypted_bytes)
+    #TODO 
 end
 
 """
 $secret_write_jld_docstring
 """
 function secret_write_jld(x::AbstractString, path::AbstractString, key::AbstractString)::String
-    ext::String = splitext(path)[2]
+    ext::String = Base.Filesystem.splitext(path)[2]
     if ext != ".jld2"
         error("File extension must be .jld2")
     end
 
-    encrypted_data::String = secret_encrypt(x, key)
-    JLD2.save_object(path, encrypted_data)
+    JLD2.save_object(path, secret_encrypt(x, key))
 
     return path
 end
@@ -84,28 +78,32 @@ end
 $secret_read_jld_docstring
 """
 function secret_read_jld(path::AbstractString, key::AbstractString)::String
-    ext::String = splitext(path)[2]
+    ext::String = Base.Filesystem.splitext(path)[2]
     if ext != ".jld2"
         error("File extension must be .jld2")
     end
 
-    encrypted_data::String = JLD2.load_object(path)
-
-    return secret_decrypt(encrypted_data, key)
+    return secret_decrypt(JLD2.load_object(path), key)
 end
 
 """
 $secret_decrypt_file_docstring
 """
-function secret_decrypt_file(path::AbstractString, key::AbstractString, envir)
+function secret_decrypt_file(path::AbstractString, key::AbstractString, envir)::String
+    temporary_path::String = Base.Filesystem.tempname()
+    Base.write(temporary_path, secret_decrypt(Base.read(path, String), key))
+    push!(envir, temporary_path => () -> Base.Filesystem.rm(temporary_path, force=true))
 
+    return temporary_path
 end
 
 """
 $secret_encrypt_file_docstring
 """
-function secret_encrypt_file(path::AbstractString, key::AbstractString)
+function secret_encrypt_file(path::AbstractString, key::AbstractString)::String
+    Base.write(path, secret_encrypt(Base.read(path, String), key))
 
+    return path
 end
 
 """
@@ -118,8 +116,12 @@ end
 """
 $obfuscate_docstring
 """
-function obfuscate(x::AbstractString)
+function obfuscate(x::String)::String
+    key::String = secret_make_key()
+    encrypted::String = secret_encrypt(x, key)
+    ENV["OBFUSCATE_KEY"] = key
 
+    return "obfuscated(\"$encrypted\")"
 end
 
 """
@@ -132,8 +134,15 @@ end
 """
 $obfuscated_docstring
 """
-function obfuscated(x::AbstractString)
+function obfuscated(x::String)::Obfuscated
+    return Obfuscated(x)
+end
 
+"""
+$unobfuscate_docstring
+"""
+function unobfuscate(x::Obfuscated)::String
+    return secret_decrypt(x.value, ENV["OBFUSCATE_KEY"])
 end
 
 """

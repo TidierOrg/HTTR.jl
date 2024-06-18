@@ -5,7 +5,7 @@ Julia port of [httr2](https://github.com/r-lib/httr2)
 """
 module HTTR
 
-using Chain, Base64, Dates, EzXML, HTTP, JLD2, JSON3, libsodium_jll, ProgressMeter, Random, URIs
+using Chain, Base64, Dates, EzXML, HTTP, JLD2, JSON3, ProgressMeter, Random, URIs
 
 include("docstrings.jl")
 
@@ -114,16 +114,17 @@ export
     #curl_translate,
     curl_help,
     secret_make_key,
-    secret_encrypt,
-    secret_decrypt,
-    secret_write_jld,
-    secret_read_jld,
+    #secret_encrypt,
+    #secret_decrypt,
+    #secret_write_jld,
+    #secret_read_jld,
     #secret_decrypt_file,
     #secret_encrypt_file,
     secret_has_key,
     #obfuscate,
     #Obfuscated,
     #obfuscated,
+    #unobfuscate,
     url_parse,
     url_build
 

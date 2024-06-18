@@ -12,6 +12,8 @@ Request object for HTTR functions.
 - `verbosity::Int`: The verbosity of the request.
 - `retries::Int`: The number of retries of the request.
 - `retry::Bool`: Whether to retry the request.
+- `timeout::Int`: The timeout of the request.
+- `progress::Bool`: Whether to show the progress of the request.
 
 """
 
@@ -126,6 +128,7 @@ Updates the method of the request.
 
 ## Returns
 - `HTTR.Request`: The modified request.
+
 """
 
 const req_options_docstring::String = 
@@ -135,6 +138,15 @@ const req_options_docstring::String =
 
 const req_progress_docstring::String = 
 """
+    HTTR.req_progress(req::HTTR.Request)::HTTR.Request
+
+Adds a progress bar to the request.
+
+## Arguments
+- `req::HTTR.Request`: The request object.
+
+## Returns
+- `HTTR.Request`: The modified request.
 
 """
 
@@ -455,51 +467,145 @@ const resps_data_docstring::String =
 
 const resp_body_raw_docstring::String = 
 """
+    HTTR.resp_body_raw(resp::HTTP.Messages.Response)::Vector{UInt8}
+
+Returns the raw body of the response.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+
+## Returns
+- `Vector{UInt8}`: The raw body of the response.
 
 """
 
 const resp_has_body_docstring::String = 
 """
+    HTTR.resp_has_body(resp::HTTP.Messages.Response)::Bool
+
+Returns whether the response has a body.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+
+## Returns
+- `Bool`: Whether the response has a body.
 
 """
 
 const resp_body_string_docstring::String = 
 """
+    HTTR.resp_body_string(resp::HTTP.Messages.Response)::String
+
+Returns the body of the response as a string.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+
+## Returns
+- `String`: The body of the response as a string.
 
 """
 
 const resp_body_json_docstring::String = 
 """
+    HTTR.resp_body_json(resp::HTTP.Messages.Response; check_type::Bool=true, kwargs...)::Dict
+
+Returns the body of the response as a JSON object.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+- `check_type::Bool=true`: Whether to check the content type of the response.
+- `kwargs`: Additional keyword arguments to pass to `JSON.read`.
+
+## Returns
+- `Dict`: The body of the response as a JSON object.
 
 """
 
 const resp_body_html_docstring::String = 
 """
+    HTTR.resp_body_html(resp::HTTP.Messages.Response; check_type::Bool=true, kwargs...)
+
+Returns the body of the response as an HTML string.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+- `check_type::Bool=true`: Whether to check the content type of the response.
+- `kwargs`: Additional keyword arguments to pass to `EzXML.parsehtml`.
+
+## Returns
+- `HTMLDocument`: The body of the response as an HTML document.
 
 """
 
 const resp_body_xml_docstring::String = 
 """
+    HTTR.resp_body_xml(resp::HTTP.Messages.Response; check_type::Bool=true, kwargs...)
+
+Returns the body of the response as an XML string.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+- `check_type::Bool=true`: Whether to check the content type of the response.
+- `kwargs`: Additional keyword arguments to pass to `EzXML.parsexml`.
+
+## Returns
+- `XMLDocument`: The body of the response as an XML document.
 
 """
 
 const resp_check_content_type_docstring::String = 
 """
+    HTTR.resp_check_content_type(resp::HTTP.Messages.Response, content_type::AbstractString)
+
+Checks the content type of the response.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+- `content_type::AbstractString`: The expected content type.
 
 """
 
 const resp_content_type_docstring::String = 
 """
+    HTTR.resp_content_type(resp::HTTP.Messages.Response)
+
+Returns the content type of the response.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+
+## Returns
+- `Union{Nothing,String}`: The content type of the response.
 
 """
 
 const resp_encoding_docstring::String = 
 """
+    HTTR.resp_encoding(resp::HTTP.Messages.Response)
+
+Returns the encoding of the response.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+
+## Returns
+- `String`: The encoding of the response.
 
 """
 
 const resp_date_docstring::String = 
 """
+    HTTR.resp_date(resp::HTTP.Messages.Response)
+
+Returns the date of the response.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+
+## Returns
+- `Union{String,DateTime}`: The date of the response. If the date is not available, returns the current time.
 
 """
 
@@ -510,11 +616,31 @@ const resp_headers_docstring::String =
 
 const resp_header_docstring::String = 
 """
+    HTTR.resp_header(resp::HTTP.Messages.Response, header::AbstractString)
+
+Returns the header of the response.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+- `header::AbstractString`: The name of the header.
+
+## Returns
+- `Union{Nothing,String}`: The value of the header. If the header is not available, returns `nothing`.
 
 """
 
 const resp_header_exists_docstring::String = 
 """
+    HTTR.resp_header_exists(resp::HTTP.Messages.Response, header::AbstractString)
+
+Checks if the header exists in the response.
+
+## Arguments
+- `resp::HTTP.Messages.Response`: The response object.
+- `header::AbstractString`: The name of the header.
+
+## Returns
+- `Bool`: Whether the header exists in the response.
 
 """
 
@@ -608,7 +734,7 @@ const secret_write_jld_docstring::String =
 """
     HTTR.secret_write_jld(x::AbstractString, path::AbstractString, key::AbstractString)::String
 
-Write a secret to a JLD file.
+Write a secret to a JLD file. `secret_read_jld` is equivalent to `secret_read_rds` in R.
 
 ## Arguments
 - `x::AbstractString`: The secret to write.
@@ -624,7 +750,7 @@ const secret_read_jld_docstring::String =
 """
     HTTR.secret_read_jld(path::AbstractString, key::AbstractString)::String
 
-Read a secret from a JLD file.
+Read a secret from a JLD file. `secret_write_jld` is equivalent to `secret_write_rds` in R.
 
 ## Arguments
 - `path::AbstractString`: The path of the JLD file.
@@ -670,6 +796,11 @@ const Obfuscated_docstring::String =
 """
 
 const obfuscated_docstring::String = 
+"""
+
+"""
+
+const unobfuscate_docstring::String =
 """
 
 """
