@@ -10,8 +10,8 @@ $Request_docstring
     verbosity::Int = 0
     retries::Int = 0
     retry::Bool = false
+    timeout::Int = 0
     progress::Bool = false
-    proxy::AbstractDict = Dict()
 end
 
 """
@@ -99,28 +99,28 @@ end
 $req_body_json_modify_docstring
 """
 function req_body_json_modify(req::HTTR.Request, data::AbstractString)::HTTR.Request
-
+    return req
 end
 
 """
 $req_body_form_docstring
 """
 function req_body_form(req::HTTR.Request)::HTTR.Request
-
+    return req
 end
 
 """
 $req_body_multipart_docstring
 """
 function req_body_multipart(req::HTTR.Request)::HTTR.Request
-
+    return req
 end
 
 """
 $req_cookie_preserve_docstring
 """
 function req_cookie_preserve(req::HTTR.Request, path::AbstractString)::HTTR.Request
-
+    return req
 end
 
 """
@@ -149,14 +149,16 @@ end
 $req_options_docstring
 """
 function req_options(req::HTTR.Request)::HTTR.Request
-
+    return req
 end
 
 """
 $req_progress_docstring
 """
-function req_progress(req::HTTR.Request, type::AbstractString="down")::HTTR.Request
+function req_progress(req::HTTR.Request)::HTTR.Request
+    req.progress = true
 
+    return req
 end
 
 """
@@ -165,17 +167,10 @@ $req_proxy_docstring
 function req_proxy(
     req::HTTR.Request,
     url::AbstractString;
-    port::Int=0000,
+    port::Int=0,
     username::AbstractString="",
     password::AbstractString="",
     auth::AbstractString="basic")::HTTR.Request
-
-    req.proxy = Dict(
-        "proxyurl" => url,
-        "proxyport" => port,
-        "proxyusernamepassword" => "$username:$password",
-        "proxyauth" => auth
-    )
 
     return req
 end
@@ -184,14 +179,14 @@ end
 $req_template_docstring
 """
 function req_template(req::HTTR.Request)::HTTR.Request
-
+    return req
 end
 
 """
 $req_timeout_docstring
 """
 function req_timeout(req::HTTR.Request, seconds::Int)::HTTR.Request
-    req.headers = merge_headers(req.headers, ["timeout_ms" => string(seconds * 1000)])
+    req.headers = seconds
 
     return req
 end
@@ -209,21 +204,21 @@ end
 $req_url_query_docstring
 """
 function req_url_query(req::HTTR.Request)::HTTR.Request
-
+    return req
 end
 
 """
 $req_url_path_docstring
 """
 function req_url_path(req::HTTR.Request)::HTTR.Request
-
+    return req
 end
 
 """
 $req_url_path_append_docstring
 """
 function req_url_path_append(req::HTTR.Request)::HTTR.Request
-
+    return req
 end
 
 """

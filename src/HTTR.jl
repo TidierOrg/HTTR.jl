@@ -23,7 +23,7 @@ export
     req_headers,
     req_method,
     #req_options,
-    #req_progress,
+    req_progress,
     #req_proxy,
     #req_template,
     req_timeout,
@@ -35,7 +35,7 @@ export
 
 include("requests/debugging_and_testing.jl")
 export
-    last_response,
+    last_response
     last_request,
     #req_dry_run,
     req_verbose,
@@ -45,8 +45,8 @@ export
 
 include("requests/authentication.jl")
 export
-    req_auth_basic
-    req_auth_bearer_token,
+    req_auth_basic,
+    req_auth_bearer_token
     #req_oauth_auth_code,
     #oauth_flow_auth_code,
     #req_oauth_bearer_jwt,

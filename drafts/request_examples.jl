@@ -98,6 +98,7 @@ html_url = "https://www.example.com"
 
 get_html = @chain begin
     request(html_url)
+    req_pogress
     req_perform
     resp_body_html
 end

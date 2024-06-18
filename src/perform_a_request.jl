@@ -3,24 +3,39 @@
 $req_perform_docstring
 """
 function req_perform(req::HTTR.Request)::HTTP.Messages.Response
-    req_attributes::Vector = [
+    req_arguments::Vector = [
         req.method,
         req.base_url,
         req.headers,
         req.body
     ]
 
-    filter!(!isnothing, req_attributes)
+    filter!(!isnothing, req_arguments)
+
+    if req.progress
+        prog = ProgressMeter.Progress(20, desc="performing request")
+        ProgressMeter.next!(prog)
+    end
 
     resp::HTTP.Messages.Response = HTTP.request(
-        req_attributes...,
+        req_arguments...,
         retry=req.retry,
         retries=req.retries,
+        readtimeout=req.timeout,
         verbose=req.verbosity
     )
 
+    if req.progress
+        ProgressMeter.next!(prog)
+    end
+
     update_last_request(req)
     update_last_response(resp)
+
+    if req.progress
+        ProgressMeter.next!(prog)
+        ProgressMeter.finish!(prog)
+    end
 
     return resp
 end
