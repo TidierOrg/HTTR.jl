@@ -4,7 +4,7 @@ const Request_docstring::String =
 
 Request object for HTTR functions.
 
-## Fields
+## Arguments
 - `base_url::AbstractString`: The base URL of the request.
 - `method::AbstractString`: The HTTP method of the request.
 - `body::Any`: The body of the request.

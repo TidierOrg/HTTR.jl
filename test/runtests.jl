@@ -1,2 +1,1 @@
-using Test
-using HTTR
+using Test, HTTR
