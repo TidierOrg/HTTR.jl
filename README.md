@@ -1,5 +1,7 @@
 # HTTR.jl
 
+<a href="https://github.com/TidierOrg/HTTR.jl/actions/workflows/CI.yml?query=branch%3Amain"><img alt="Build Status" src="https://github.com/TidierOrg/HTTR.jl/actions/workflows/CI.yml/badge.svg?branch=main"></a> <a href="https://tidierorg.github.io/HTTR.jl/dev"><img src="https://img.shields.io/badge/Docs-Latest-blue.svg" alt="Documentation Stable" /></a>
+
 ## What is HTTR.jl
 
 `HTTR.jl` is a 100% Julia implementation of the R package, [httr2](https://github.com/r-lib/httr2)
@@ -10,6 +12,7 @@ For the development version:
 
 ```julia
 using Pkg
+
 Pkg.add(url = "https://github.com/TidierOrg/HTTR.jl.git")
 ```
 
@@ -30,7 +33,11 @@ HTTR.jl currently supports:
 
 ## Examples
 
-The **`request()`** function defaults to creating a GET request:
+Creating and modifying the request:
+
+**`HTTR.Request`** is the equivalent to R's `httr2_request` request S3 class. Several functions can be used to modify this request. These functions can modify the request's methods, body, headers, etc.
+
+The **`request()`** function creates the **`HTTR.Request`** type. Without a body the request method defaults to GET. Using the `@chain` macro a request can be performed then the response can be then read as a `String` using the **`resp_body_string`** function. If no response function is used the request will return the response as the type [`HTTP.Messages.Response`](https://juliaweb.github.io/HTTP.jl/stable/reference/#HTTP.Messages.Response) from the `HTTP.jl` package:
 
 ```julia
 using HTTR, Chain
@@ -42,7 +49,7 @@ using HTTR, Chain
 end
 ```
 
-To create a POST request add a request body to the request, one way to do this is using the **`req_body_json()`** function and adding the content type of `application/json`, so that the request can be recognized as json.
+To create a POST request add a request body to the request, one way to do this is using the **`req_body_json()`** function and adding the content type of `application/json`, so that the request can be recognized as json. The response can be then read as a json using the **`resp_body_json`** function:
 
 ```julia
 using HTTR, Chain
