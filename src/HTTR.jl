@@ -35,10 +35,11 @@ export
     #=resps_successes,=# #=resps_failures,=# #=resps_requests,=# #=resps_data=#
 
     # handle_the_response.jl
-    resp_body_raw, resp_has_body, resp_body_string, resp_body_json, resp_body_html, resp_body_xml,
-    resp_check_content_type, resp_content_type, resp_encoding, resp_date, resp_headers, resp_header,
-    resp_header_exists, resp_link_url, resp_raw, resp_retry_after, resp_status, resp_status_desc,
-    resp_is_error, resp_check_status, resp_url, resp_url_path, resp_url_query, resp_url_queries,
+    resp_body_raw, resp_has_body, resp_body_string, resp_body_json, resp_body_html, 
+    resp_body_xml, resp_check_content_type, resp_content_type, resp_encoding, 
+    resp_date, resp_headers, resp_header,cresp_header_exists, resp_link_url, resp_raw, 
+    resp_retry_after, resp_status, resp_status_desc, resp_is_error, resp_check_status, 
+    resp_url, resp_url_path, resp_url_query, resp_url_queries,
 
     # miscellaenous_helpers.jl
     #=curl_translate,=# curl_help, secret_make_key, #=secret_encrypt,=# #=secret_decrypt,=#
