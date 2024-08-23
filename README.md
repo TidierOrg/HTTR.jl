@@ -4,7 +4,9 @@
 
 ## What is HTTR.jl
 
-`HTTR.jl` is a 100% Julia implementation of the R package, [httr2](https://github.com/r-lib/httr2)
+`HTTR.jl` is a 100% Julia implementation of the R [httr2](https://github.com/r-lib/httr2) package.
+
+The main purpose of `HTTR.jl` is to bridge the gap between the web and data analysis in Julia, offering a flexible and efficient interface for making HTTP requests while adhering to web standards. It leverages packages like [`EzXML.jl`](https://github.com/JuliaIO/EzXML.jl), [`HTTP.jl`](https://github.com/JuliaWeb/HTTP.jl), [`JLD2.jl`](https://github.com/JuliaIO/JLD2.jl), [`JSON3.jl`](https://github.com/quinnj/JSON3.jl), and [`URIs.jl`](https://github.com/JuliaWeb/URIs.jl) to create and handle requests and manage various types of web data.
 
 ## Installation
 
