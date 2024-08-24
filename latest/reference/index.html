@@ -1,0 +1,1359 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="HTTR.jl">
+      
+      
+        <meta name="author" content="Lazaro Alonso and Karandeep Singh">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.33">
+    
+    
+      
+        <title>Reference - HTTR.jl</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Lato";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/custom.css">
+    
+      <link rel="stylesheet" href="../assets/Documenter.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="crimson" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#index" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="HTTR.jl" class="md-header__button md-logo" aria-label="HTTR.jl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HTTR.jl
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="crimson" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5c-.84 0-1.65.15-2.39.42L12 2M3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29L3.34 7m.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14L3.36 17M20.65 7l-1.77 3.79a7.023 7.023 0 0 0-2.38-4.15l4.15.36m-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29L20.64 17M12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44L12 22Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="crimson" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3 3.19.09m3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95 2.06.05m-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/TidierOrg/HTTR.jl" title="source.link.title" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HTTR.jl
+  </div>
+</a>
+
+
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="HTTR.jl" class="md-nav__button md-logo" aria-label="HTTR.jl" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    HTTR.jl
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/TidierOrg/HTTR.jl" title="source.link.title" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    HTTR.jl
+  </div>
+</a>
+
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-exported-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference - Exported functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-internal-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference - Internal functions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-exported-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference - Exported functions
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference-internal-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference - Internal functions
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Reference</h1>
+
+<p><a id='Index'></a></p>
+<p><a id='Index-1'></a></p>
+<h2 id="index">Index<a class="headerlink" href="#index" title="Permanent link">¤</a></h2>
+<ul>
+<li><a href="./#HTTR.HTTR"><code>HTTR.HTTR</code></a></li>
+<li><a href="./#HTTR.OAuthClient"><code>HTTR.OAuthClient</code></a></li>
+<li><a href="./#HTTR.OAuthToken"><code>HTTR.OAuthToken</code></a></li>
+<li><a href="./#HTTR.Obfuscated"><code>HTTR.Obfuscated</code></a></li>
+<li><a href="./#HTTR.Request"><code>HTTR.Request</code></a></li>
+<li><a href="./#HTTR.curl_help-Tuple{}"><code>HTTR.curl_help</code></a></li>
+<li><a href="./#HTTR.curl_translate-Tuple{Union{Cmd, AbstractString}}"><code>HTTR.curl_translate</code></a></li>
+<li><a href="./#HTTR.last_request-Tuple{}"><code>HTTR.last_request</code></a></li>
+<li><a href="./#HTTR.last_response-Tuple{}"><code>HTTR.last_response</code></a></li>
+<li><a href="./#HTTR.local_mocked_responses-Tuple{}"><code>HTTR.local_mocked_responses</code></a></li>
+<li><a href="./#HTTR.oauth_cache_path-Tuple{}"><code>HTTR.oauth_cache_path</code></a></li>
+<li><a href="./#HTTR.oauth_client-Tuple{AbstractString, AbstractString}"><code>HTTR.oauth_client</code></a></li>
+<li><a href="./#HTTR.oauth_client_req_auth-Tuple{Request, OAuthClient}"><code>HTTR.oauth_client_req_auth</code></a></li>
+<li><a href="./#HTTR.oauth_client_req_auth_body-Tuple{Request, OAuthClient}"><code>HTTR.oauth_client_req_auth_body</code></a></li>
+<li><a href="./#HTTR.oauth_client_req_auth_header-Tuple{Request, OAuthClient}"><code>HTTR.oauth_client_req_auth_header</code></a></li>
+<li><a href="./#HTTR.oauth_client_req_auth_jwt_sig-Tuple{Request, OAuthClient}"><code>HTTR.oauth_client_req_auth_jwt_sig</code></a></li>
+<li><a href="./#HTTR.oauth_flow_auth_code-Tuple{}"><code>HTTR.oauth_flow_auth_code</code></a></li>
+<li><a href="./#HTTR.oauth_flow_bearer_jwt-Tuple{}"><code>HTTR.oauth_flow_bearer_jwt</code></a></li>
+<li><a href="./#HTTR.oauth_flow_client_credentials-Tuple{}"><code>HTTR.oauth_flow_client_credentials</code></a></li>
+<li><a href="./#HTTR.oauth_flow_device-Tuple{}"><code>HTTR.oauth_flow_device</code></a></li>
+<li><a href="./#HTTR.oauth_flow_password-Tuple{}"><code>HTTR.oauth_flow_password</code></a></li>
+<li><a href="./#HTTR.oauth_flow_refresh-Tuple{}"><code>HTTR.oauth_flow_refresh</code></a></li>
+<li><a href="./#HTTR.oauth_redirect_uri-Tuple{}"><code>HTTR.oauth_redirect_uri</code></a></li>
+<li><a href="./#HTTR.oauth_token-Tuple{AbstractString}"><code>HTTR.oauth_token</code></a></li>
+<li><a href="./#HTTR.obfuscate-Tuple{String}"><code>HTTR.obfuscate</code></a></li>
+<li><a href="./#HTTR.obfuscated-Tuple{String}"><code>HTTR.obfuscated</code></a></li>
+<li><a href="./#HTTR.req_auth_basic-Tuple{Request, AbstractString}"><code>HTTR.req_auth_basic</code></a></li>
+<li><a href="./#HTTR.req_auth_bearer_token-Tuple{Request, AbstractString}"><code>HTTR.req_auth_bearer_token</code></a></li>
+<li><a href="./#HTTR.req_body_file-Tuple{Request, AbstractString}"><code>HTTR.req_body_file</code></a></li>
+<li><a href="./#HTTR.req_body_form-Tuple{Request}"><code>HTTR.req_body_form</code></a></li>
+<li><a href="./#HTTR.req_body_json-Tuple{Request, Union{AbstractString, AbstractDict}}"><code>HTTR.req_body_json</code></a></li>
+<li><a href="./#HTTR.req_body_json_modify-Tuple{Request, AbstractString}"><code>HTTR.req_body_json_modify</code></a></li>
+<li><a href="./#HTTR.req_body_multipart-Tuple{Request}"><code>HTTR.req_body_multipart</code></a></li>
+<li><a href="./#HTTR.req_body_raw-Tuple{Request, Union{AbstractString, AbstractVector}}"><code>HTTR.req_body_raw</code></a></li>
+<li><a href="./#HTTR.req_cache-Tuple{Request, AbstractString}"><code>HTTR.req_cache</code></a></li>
+<li><a href="./#HTTR.req_cookie_preserve-Tuple{Request, AbstractString}"><code>HTTR.req_cookie_preserve</code></a></li>
+<li><a href="./#HTTR.req_dry_run-Tuple{Request}"><code>HTTR.req_dry_run</code></a></li>
+<li><a href="./#HTTR.req_error-Tuple{Request}"><code>HTTR.req_error</code></a></li>
+<li><a href="./#HTTR.req_headers-Tuple{Request, AbstractVector}"><code>HTTR.req_headers</code></a></li>
+<li><a href="./#HTTR.req_method-Tuple{Request, AbstractString}"><code>HTTR.req_method</code></a></li>
+<li><a href="./#HTTR.req_oauth_auth_code-Tuple{}"><code>HTTR.req_oauth_auth_code</code></a></li>
+<li><a href="./#HTTR.req_oauth_bearer_jwt-Tuple{}"><code>HTTR.req_oauth_bearer_jwt</code></a></li>
+<li><a href="./#HTTR.req_oauth_client_credentials-Tuple{}"><code>HTTR.req_oauth_client_credentials</code></a></li>
+<li><a href="./#HTTR.req_oauth_device-Tuple{}"><code>HTTR.req_oauth_device</code></a></li>
+<li><a href="./#HTTR.req_oauth_password-Tuple{}"><code>HTTR.req_oauth_password</code></a></li>
+<li><a href="./#HTTR.req_oauth_refresh-Tuple{}"><code>HTTR.req_oauth_refresh</code></a></li>
+<li><a href="./#HTTR.req_options-Tuple{Request}"><code>HTTR.req_options</code></a></li>
+<li><a href="./#HTTR.req_perform-Tuple{Request}"><code>HTTR.req_perform</code></a></li>
+<li><a href="./#HTTR.req_perform_stream-Tuple{Request, Any}"><code>HTTR.req_perform_stream</code></a></li>
+<li><a href="./#HTTR.req_progress-Tuple{Request}"><code>HTTR.req_progress</code></a></li>
+<li><a href="./#HTTR.req_proxy-Tuple{Request, AbstractString}"><code>HTTR.req_proxy</code></a></li>
+<li><a href="./#HTTR.req_retry-Tuple{Request}"><code>HTTR.req_retry</code></a></li>
+<li><a href="./#HTTR.req_template-Tuple{Request}"><code>HTTR.req_template</code></a></li>
+<li><a href="./#HTTR.req_throttle-Tuple{Request, Number}"><code>HTTR.req_throttle</code></a></li>
+<li><a href="./#HTTR.req_timeout-Tuple{Request, Int64}"><code>HTTR.req_timeout</code></a></li>
+<li><a href="./#HTTR.req_url-Tuple{Request, AbstractString}"><code>HTTR.req_url</code></a></li>
+<li><a href="./#HTTR.req_url_path-Tuple{Request}"><code>HTTR.req_url_path</code></a></li>
+<li><a href="./#HTTR.req_url_path_append-Tuple{Request}"><code>HTTR.req_url_path_append</code></a></li>
+<li><a href="./#HTTR.req_url_query-Tuple{Request}"><code>HTTR.req_url_query</code></a></li>
+<li><a href="./#HTTR.req_user_agent-Tuple{Request, AbstractString}"><code>HTTR.req_user_agent</code></a></li>
+<li><a href="./#HTTR.req_verbose-Tuple{Request, Int64}"><code>HTTR.req_verbose</code></a></li>
+<li><a href="./#HTTR.request-Tuple{AbstractString}"><code>HTTR.request</code></a></li>
+<li><a href="./#HTTR.resp_body_html-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_body_html</code></a></li>
+<li><a href="./#HTTR.resp_body_json-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_body_json</code></a></li>
+<li><a href="./#HTTR.resp_body_raw-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_body_raw</code></a></li>
+<li><a href="./#HTTR.resp_body_string-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_body_string</code></a></li>
+<li><a href="./#HTTR.resp_body_xml-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_body_xml</code></a></li>
+<li><a href="./#HTTR.resp_check_content_type"><code>HTTR.resp_check_content_type</code></a></li>
+<li><a href="./#HTTR.resp_check_status-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_check_status</code></a></li>
+<li><a href="./#HTTR.resp_content_type-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_content_type</code></a></li>
+<li><a href="./#HTTR.resp_date-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_date</code></a></li>
+<li><a href="./#HTTR.resp_encoding-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_encoding</code></a></li>
+<li><a href="./#HTTR.resp_has_body-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_has_body</code></a></li>
+<li><a href="./#HTTR.resp_header-Tuple{HTTP.Messages.Response, AbstractString}"><code>HTTR.resp_header</code></a></li>
+<li><a href="./#HTTR.resp_header_exists-Tuple{HTTP.Messages.Response, AbstractString}"><code>HTTR.resp_header_exists</code></a></li>
+<li><a href="./#HTTR.resp_headers"><code>HTTR.resp_headers</code></a></li>
+<li><a href="./#HTTR.resp_is_error-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_is_error</code></a></li>
+<li><a href="./#HTTR.resp_link_url-Tuple{HTTP.Messages.Response, AbstractString}"><code>HTTR.resp_link_url</code></a></li>
+<li><a href="./#HTTR.resp_raw-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_raw</code></a></li>
+<li><a href="./#HTTR.resp_retry_after-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_retry_after</code></a></li>
+<li><a href="./#HTTR.resp_status-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_status</code></a></li>
+<li><a href="./#HTTR.resp_status_desc-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_status_desc</code></a></li>
+<li><a href="./#HTTR.resp_url-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_url</code></a></li>
+<li><a href="./#HTTR.resp_url_path-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_url_path</code></a></li>
+<li><a href="./#HTTR.resp_url_queries-Tuple{HTTP.Messages.Response}"><code>HTTR.resp_url_queries</code></a></li>
+<li><a href="./#HTTR.resp_url_query-Tuple{HTTP.Messages.Response, AbstractString}"><code>HTTR.resp_url_query</code></a></li>
+<li><a href="./#HTTR.secret_decrypt-Tuple{AbstractString, AbstractString}"><code>HTTR.secret_decrypt</code></a></li>
+<li><a href="./#HTTR.secret_decrypt_file-Tuple{AbstractString, AbstractString, Any}"><code>HTTR.secret_decrypt_file</code></a></li>
+<li><a href="./#HTTR.secret_encrypt-Tuple{AbstractString, AbstractString}"><code>HTTR.secret_encrypt</code></a></li>
+<li><a href="./#HTTR.secret_encrypt_file-Tuple{AbstractString, AbstractString}"><code>HTTR.secret_encrypt_file</code></a></li>
+<li><a href="./#HTTR.secret_has_key-Tuple{AbstractString}"><code>HTTR.secret_has_key</code></a></li>
+<li><a href="./#HTTR.secret_make_key-Tuple{}"><code>HTTR.secret_make_key</code></a></li>
+<li><a href="./#HTTR.secret_read_jld-Tuple{AbstractString, AbstractString}"><code>HTTR.secret_read_jld</code></a></li>
+<li><a href="./#HTTR.secret_write_jld-Tuple{AbstractString, AbstractString, AbstractString}"><code>HTTR.secret_write_jld</code></a></li>
+<li><a href="./#HTTR.unobfuscate-Tuple{HTTR.Obfuscated}"><code>HTTR.unobfuscate</code></a></li>
+<li><a href="./#HTTR.url_build-Tuple{AbstractDict}"><code>HTTR.url_build</code></a></li>
+<li><a href="./#HTTR.url_parse-Tuple{AbstractString}"><code>HTTR.url_parse</code></a></li>
+<li><a href="./#HTTR.with_mocked_responses-Tuple{}"><code>HTTR.with_mocked_responses</code></a></li>
+<li><a href="./#HTTR.with_verbosity-Tuple{Request}"><code>HTTR.with_verbosity</code></a></li>
+</ul>
+<p><a id='Reference-Exported-functions'></a></p>
+<p><a id='Reference-Exported-functions-1'></a></p>
+<h2 id="reference-exported-functions">Reference - Exported functions<a class="headerlink" href="#reference-exported-functions" title="Permanent link">¤</a></h2>
+<p><a id='HTTR.HTTR' href='#HTTR.HTTR'>#</a>
+<strong><code>HTTR.HTTR</code></strong> &mdash; <em>Module</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span>
+</code></pre></div>
+<p>Julia port of <a href="https://github.com/r-lib/httr2">httr2</a> </p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/HTTR.jl#L1-L5' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.OAuthClient' href='#HTTR.OAuthClient'>#</a>
+<strong><code>HTTR.OAuthClient</code></strong> &mdash; <em>Type</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/oauth.jl#L15-L17' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.OAuthToken' href='#HTTR.OAuthToken'>#</a>
+<strong><code>HTTR.OAuthToken</code></strong> &mdash; <em>Type</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/oauth.jl#L92-L94' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.Request' href='#HTTR.Request'>#</a>
+<strong><code>HTTR.Request</code></strong> &mdash; <em>Type</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Request object for HTTR functions.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>base_url::AbstractString</code>: The base URL of the request.</li>
+<li><code>method::AbstractString</code>: The HTTP method of the request.</li>
+<li><code>body::Any</code>: The body of the request.</li>
+<li><code>headers::AbstractVector</code>: The headers of the request.</li>
+<li><code>verbosity::Int</code>: The verbosity of the request.</li>
+<li><code>retries::Int</code>: The number of retries of the request.</li>
+<li><code>retry::Bool</code>: Whether to retry the request.</li>
+<li><code>timeout::Int</code>: The timeout of the request.</li>
+<li><code>progress::Bool</code>: Whether to show the progress of the request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L2-L18' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.curl_help-Tuple{}' href='#HTTR.curl_help-Tuple{}'>#</a>
+<strong><code>HTTR.curl_help</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">curl_help</span><span class="p">()</span><span class="o">::</span><span class="kt">String</span>
+</code></pre></div>
+<p>This function prints out useful information about the curl command line tool.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L35-L39' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.last_request-Tuple{}' href='#HTTR.last_request-Tuple{}'>#</a>
+<strong><code>HTTR.last_request</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">last_request</span><span class="p">()</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">Nothing</span><span class="p">,</span><span class="kt">HTTR</span><span class="o">.</span><span class="kt">Request</span><span class="p">}</span>
+</code></pre></div>
+<p>Returns the last request object.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>Union{Nothing,HTTR.Request}</code>: The last request object.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/debugging_and_testing.jl#L21-L29' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.last_response-Tuple{}' href='#HTTR.last_response-Tuple{}'>#</a>
+<strong><code>HTTR.last_response</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">last_response</span><span class="p">()</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">Nothing</span><span class="p">,</span><span class="kt">HTTP</span><span class="o">.</span><span class="kt">Messages</span><span class="o">.</span><span class="kt">Response</span><span class="p">}</span>
+</code></pre></div>
+<p>Returns the last response object.</p>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>Union{Nothing,HTTP.Messages.Response}</code>: The last response object.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/debugging_and_testing.jl#L8-L16' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_cache_path-Tuple{}' href='#HTTR.oauth_cache_path-Tuple{}'>#</a>
+<strong><code>HTTR.oauth_cache_path</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/oauth.jl#L2-L4' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_client-Tuple{AbstractString, AbstractString}' href='#HTTR.oauth_client-Tuple{AbstractString, AbstractString}'>#</a>
+<strong><code>HTTR.oauth_client</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/oauth.jl#L28-L30' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_redirect_uri-Tuple{}' href='#HTTR.oauth_redirect_uri-Tuple{}'>#</a>
+<strong><code>HTTR.oauth_redirect_uri</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/oauth.jl#L79-L81' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_token-Tuple{AbstractString}' href='#HTTR.oauth_token-Tuple{AbstractString}'>#</a>
+<strong><code>HTTR.oauth_token</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/oauth.jl#L104-L106' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_auth_basic-Tuple{Request, AbstractString}' href='#HTTR.req_auth_basic-Tuple{Request, AbstractString}'>#</a>
+<strong><code>HTTR.req_auth_basic</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_auth_basic</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span><span class="w"> </span><span class="n">username</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">;</span><span class="w"> </span><span class="n">password</span><span class="o">::</span><span class="kt">AbstractString</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Updates the basic authentication of the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+<li><code>username::AbstractString</code>: The username to be sent in the request.</li>
+<li><code>password::AbstractString=""</code>: The password to be sent in the request.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L2-L15' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_auth_bearer_token-Tuple{Request, AbstractString}' href='#HTTR.req_auth_bearer_token-Tuple{Request, AbstractString}'>#</a>
+<strong><code>HTTR.req_auth_bearer_token</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_auth_bearer_token</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span><span class="w"> </span><span class="n">token</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Updates the bearer token authentication of the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+<li><code>token::AbstractString</code>: The bearer token to be sent in the request.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L19-L31' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_body_file-Tuple{Request, AbstractString}' href='#HTTR.req_body_file-Tuple{Request, AbstractString}'>#</a>
+<strong><code>HTTR.req_body_file</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_body_file</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">;</span><span class="w"> </span><span class="n">type</span><span class="o">::</span><span class="kt">AbstractString</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Adds a file body to the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+<li><code>path::AbstractString</code>: The path to the file to be sent in the request body.</li>
+<li>`type::AbstractString="": The content type of the request body.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L53-L66' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_body_json-Tuple{Request, Union{AbstractString, AbstractDict}}' href='#HTTR.req_body_json-Tuple{Request, Union{AbstractString, AbstractDict}}'>#</a>
+<strong><code>HTTR.req_body_json</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_body_json</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="kt">AbstractDict</span><span class="p">};</span><span class="w"> </span><span class="n">type</span><span class="o">::</span><span class="kt">AbstractString</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">kwargs</span><span class="o">...</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Adds a JSON body to the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+<li><code>data::Union{AbstractString,AbstractDict}</code>: The data to be sent in the request body.</li>
+<li>`type::AbstractString="": The content type of the request body.</li>
+<li><code>kwargs</code>: Additional keyword arguments to pass to the <code>JSON3.write</code> function.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L72-L86' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_body_raw-Tuple{Request, Union{AbstractString, AbstractVector}}' href='#HTTR.req_body_raw-Tuple{Request, Union{AbstractString, AbstractVector}}'>#</a>
+<strong><code>HTTR.req_body_raw</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_body_raw</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="o">::</span><span class="kt">Union</span><span class="p">{</span><span class="kt">AbstractString</span><span class="p">,</span><span class="kt">AbstractVector</span><span class="p">};</span><span class="w"> </span><span class="n">type</span><span class="o">::</span><span class="kt">AbstractString</span><span class="o">=</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Adds a raw body to the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+<li><code>data::Union{AbstractString,AbstractVector}</code>: The data to be sent in the request body.</li>
+<li>`type::AbstractString="": The content type of the request body.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L34-L47' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_headers-Tuple{Request, AbstractVector}' href='#HTTR.req_headers-Tuple{Request, AbstractVector}'>#</a>
+<strong><code>HTTR.req_headers</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_headers</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="o">::</span><span class="kt">AbstractVector</span><span class="p">;</span><span class="w"> </span><span class="n">redact</span><span class="o">::</span><span class="kt">Bool</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Updates headers of the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+<li><code>headers::AbstractVector</code>: The headers to be sent in the request.</li>
+<li><code>redact::Bool=false</code>: Whether to redact the headers.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L126-L139' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_method-Tuple{Request, AbstractString}' href='#HTTR.req_method-Tuple{Request, AbstractString}'>#</a>
+<strong><code>HTTR.req_method</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_method</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span><span class="w"> </span><span class="n">method</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Updates the method of the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+<li><code>method::AbstractString</code>: The method to be sent in the request.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L139-L151' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_perform-Tuple{Request}' href='#HTTR.req_perform-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_perform</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_perform</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span>
+</code></pre></div>
+<p>Performs the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTP.Messages.Response</code>: The response object.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/perform_a_request.jl#L2-L13' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_progress-Tuple{Request}' href='#HTTR.req_progress-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_progress</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_progress</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Adds a progress bar to the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L155-L166' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_retry-Tuple{Request}' href='#HTTR.req_retry-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_retry</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_retry</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span><span class="w"> </span><span class="n">max_retries</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Updates the maximum number of retries of the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+<li><code>max_retries::Int</code>: The maximum number of retries.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/perform_a_request.jl#L93-L105' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_timeout-Tuple{Request, Int64}' href='#HTTR.req_timeout-Tuple{Request, Int64}'>#</a>
+<strong><code>HTTR.req_timeout</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_timeout</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span><span class="w"> </span><span class="n">seconds</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Updates the timeout of the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+<li><code>seconds::Int</code>: The timeout in seconds.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L185-L197' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_url-Tuple{Request, AbstractString}' href='#HTTR.req_url-Tuple{Request, AbstractString}'>#</a>
+<strong><code>HTTR.req_url</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_url</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span><span class="w"> </span><span class="n">url</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Updates the URL of the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+<li><code>url::AbstractString</code>: The URL to be sent in the request.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L194-L206' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_user_agent-Tuple{Request, AbstractString}' href='#HTTR.req_user_agent-Tuple{Request, AbstractString}'>#</a>
+<strong><code>HTTR.req_user_agent</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L224-L226' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_verbose-Tuple{Request, Int64}' href='#HTTR.req_verbose-Tuple{Request, Int64}'>#</a>
+<strong><code>HTTR.req_verbose</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">req_verbose</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">,</span><span class="w"> </span><span class="n">verbosity</span><span class="o">::</span><span class="kt">Int</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Updates the verbosity of the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+<li><code>verbosity::Int</code>: The verbosity level.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/debugging_and_testing.jl#L43-L55' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.request-Tuple{AbstractString}' href='#HTTR.request-Tuple{AbstractString}'>#</a>
+<strong><code>HTTR.request</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">base_url</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Create a new request object.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>base_url::AbstractString</code>: The base URL of the request.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: A new request object.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L17-L28' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_body_html-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_body_html-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_body_html</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_body_html</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">;</span><span class="w"> </span><span class="n">check_type</span><span class="o">::</span><span class="kt">Bool</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">kwargs</span><span class="o">...</span><span class="p">)</span>
+</code></pre></div>
+<p>Returns the body of the response as an HTML string.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+<li><code>check_type::Bool=true</code>: Whether to check the content type of the response.</li>
+<li><code>kwargs</code>: Additional keyword arguments to pass to <code>EzXML.parsehtml</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTMLDocument</code>: The body of the response as an HTML document.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L34-L47' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_body_json-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_body_json-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_body_json</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_body_json</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">;</span><span class="w"> </span><span class="n">check_type</span><span class="o">::</span><span class="kt">Bool</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">kwargs</span><span class="o">...</span><span class="p">)</span><span class="o">::</span><span class="kt">Dict</span>
+</code></pre></div>
+<p>Returns the body of the response as a JSON object.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+<li><code>check_type::Bool=true</code>: Whether to check the content type of the response.</li>
+<li><code>kwargs</code>: Additional keyword arguments to pass to <code>JSON.read</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>Dict</code>: The body of the response as a JSON object.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L23-L36' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_body_raw-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_body_raw-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_body_raw</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_body_raw</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">)</span><span class="o">::</span><span class="kt">Vector</span><span class="p">{</span><span class="kt">UInt8</span><span class="p">}</span>
+</code></pre></div>
+<p>Returns the raw body of the response.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>Vector{UInt8}</code>: The raw body of the response.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L2-L13' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_body_string-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_body_string-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_body_string</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_body_string</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">)</span><span class="o">::</span><span class="kt">String</span>
+</code></pre></div>
+<p>Returns the body of the response as a string.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>String</code>: The body of the response as a string.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L16-L27' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_body_xml-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_body_xml-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_body_xml</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_body_xml</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">;</span><span class="w"> </span><span class="n">check_type</span><span class="o">::</span><span class="kt">Bool</span><span class="o">=</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">kwargs</span><span class="o">...</span><span class="p">)</span>
+</code></pre></div>
+<p>Returns the body of the response as an XML string.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+<li><code>check_type::Bool=true</code>: Whether to check the content type of the response.</li>
+<li><code>kwargs</code>: Additional keyword arguments to pass to <code>EzXML.parsexml</code>.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>XMLDocument</code>: The body of the response as an XML document.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L45-L58' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_check_content_type' href='#HTTR.resp_check_content_type'>#</a>
+<strong><code>HTTR.resp_check_content_type</code></strong> &mdash; <em>Function</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_check_content_type</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">,</span><span class="w"> </span><span class="n">content_type</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span>
+</code></pre></div>
+<p>Checks the content type of the response.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+<li><code>content_type::AbstractString</code>: The expected content type.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L56-L65' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_check_status-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_check_status-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_check_status</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L214-L216' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_content_type-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_content_type-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_content_type</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_content_type</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">)</span>
+</code></pre></div>
+<p>Returns the content type of the response.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>Union{Nothing,String}</code>: The content type of the response.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L69-L80' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_date-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_date-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_date</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_date</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">)</span>
+</code></pre></div>
+<p>Returns the date of the response.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>Union{String,DateTime}</code>: The date of the response. If the date is not available, returns the current time.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L96-L107' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_encoding-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_encoding-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_encoding</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_encoding</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">)</span>
+</code></pre></div>
+<p>Returns the encoding of the response.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>String</code>: The encoding of the response.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L81-L92' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_has_body-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_has_body-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_has_body</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_has_body</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">)</span><span class="o">::</span><span class="kt">Bool</span>
+</code></pre></div>
+<p>Returns whether the response has a body.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>Bool</code>: Whether the response has a body.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L9-L20' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_header-Tuple{HTTP.Messages.Response, AbstractString}' href='#HTTR.resp_header-Tuple{HTTP.Messages.Response, AbstractString}'>#</a>
+<strong><code>HTTR.resp_header</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_header</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span>
+</code></pre></div>
+<p>Returns the header of the response.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+<li><code>header::AbstractString</code>: The name of the header.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>Union{Nothing,String}</code>: The value of the header. If the header is not available, returns <code>nothing</code>.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L125-L137' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_headers' href='#HTTR.resp_headers'>#</a>
+<strong><code>HTTR.resp_headers</code></strong> &mdash; <em>Function</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L108-L110' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_is_error-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_is_error-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_is_error</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L205-L207' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_link_url-Tuple{HTTP.Messages.Response, AbstractString}' href='#HTTR.resp_link_url-Tuple{HTTP.Messages.Response, AbstractString}'>#</a>
+<strong><code>HTTR.resp_link_url</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L145-L147' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_raw-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_raw-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_raw</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L168-L170' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_retry_after-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_retry_after-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_retry_after</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L179-L181' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_status-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_status-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_status</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L191-L193' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_status_desc-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_status_desc-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_status_desc</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L198-L200' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_url-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_url-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_url</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L227-L229' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_url_path-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_url_path-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_url_path</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L234-L236' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_url_queries-Tuple{HTTP.Messages.Response}' href='#HTTR.resp_url_queries-Tuple{HTTP.Messages.Response}'>#</a>
+<strong><code>HTTR.resp_url_queries</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L255-L257' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_url_query-Tuple{HTTP.Messages.Response, AbstractString}' href='#HTTR.resp_url_query-Tuple{HTTP.Messages.Response, AbstractString}'>#</a>
+<strong><code>HTTR.resp_url_query</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L244-L246' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.secret_has_key-Tuple{AbstractString}' href='#HTTR.secret_has_key-Tuple{AbstractString}'>#</a>
+<strong><code>HTTR.secret_has_key</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">secret_has_key</span><span class="p">(</span><span class="n">key</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span><span class="o">::</span><span class="kt">Bool</span>
+</code></pre></div>
+<p>Check if a secret key exists in the environment.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>key::AbstractString</code>: The secret key.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>Bool</code>: Whether the secret key exists in the environment.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L109-L120' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.secret_make_key-Tuple{}' href='#HTTR.secret_make_key-Tuple{}'>#</a>
+<strong><code>HTTR.secret_make_key</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">secret_make_key</span><span class="p">()</span><span class="o">::</span><span class="kt">String</span>
+</code></pre></div>
+<p>Generate a new secret key that is 16 characters long.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L42-L46' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.url_build-Tuple{AbstractDict}' href='#HTTR.url_build-Tuple{AbstractDict}'>#</a>
+<strong><code>HTTR.url_build</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L164-L166' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.url_parse-Tuple{AbstractString}' href='#HTTR.url_parse-Tuple{AbstractString}'>#</a>
+<strong><code>HTTR.url_parse</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L148-L150' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.with_verbosity-Tuple{Request}' href='#HTTR.with_verbosity-Tuple{Request}'>#</a>
+<strong><code>HTTR.with_verbosity</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">with_verbosity</span><span class="p">(</span><span class="n">req</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span><span class="p">)</span><span class="o">::</span><span class="kt">HTTR</span><span class="o">.</span><span class="n">Request</span>
+</code></pre></div>
+<p>Adds a verbosity level of 2 to the request.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>req::HTTR.Request</code>: The request object.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>HTTR.Request</code>: The modified request.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/debugging_and_testing.jl#L67-L77' class='documenter-source'>source</a><br></p>
+<p><a id='Reference-Internal-functions'></a></p>
+<p><a id='Reference-Internal-functions-1'></a></p>
+<h2 id="reference-internal-functions">Reference - Internal functions<a class="headerlink" href="#reference-internal-functions" title="Permanent link">¤</a></h2>
+<p><a id='HTTR.Obfuscated' href='#HTTR.Obfuscated'>#</a>
+<strong><code>HTTR.Obfuscated</code></strong> &mdash; <em>Type</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L127-L129' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.curl_translate-Tuple{Union{Cmd, AbstractString}}' href='#HTTR.curl_translate-Tuple{Union{Cmd, AbstractString}}'>#</a>
+<strong><code>HTTR.curl_translate</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">curl_translate</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span><span class="w"> </span><span class="n">simplify_headers</span><span class="o">::</span><span class="kt">Bool</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
+</code></pre></div>
+<p>Translate curl commands into HTTR functions.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L2-L6' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.local_mocked_responses-Tuple{}' href='#HTTR.local_mocked_responses-Tuple{}'>#</a>
+<strong><code>HTTR.local_mocked_responses</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/debugging_and_testing.jl#L60-L62' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_client_req_auth-Tuple{Request, OAuthClient}' href='#HTTR.oauth_client_req_auth-Tuple{Request, OAuthClient}'>#</a>
+<strong><code>HTTR.oauth_client_req_auth</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/oauth.jl#L51-L53' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_client_req_auth_body-Tuple{Request, OAuthClient}' href='#HTTR.oauth_client_req_auth_body-Tuple{Request, OAuthClient}'>#</a>
+<strong><code>HTTR.oauth_client_req_auth_body</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/oauth.jl#L65-L67' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_client_req_auth_header-Tuple{Request, OAuthClient}' href='#HTTR.oauth_client_req_auth_header-Tuple{Request, OAuthClient}'>#</a>
+<strong><code>HTTR.oauth_client_req_auth_header</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/oauth.jl#L58-L60' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_client_req_auth_jwt_sig-Tuple{Request, OAuthClient}' href='#HTTR.oauth_client_req_auth_jwt_sig-Tuple{Request, OAuthClient}'>#</a>
+<strong><code>HTTR.oauth_client_req_auth_jwt_sig</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/oauth.jl#L72-L74' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_flow_auth_code-Tuple{}' href='#HTTR.oauth_flow_auth_code-Tuple{}'>#</a>
+<strong><code>HTTR.oauth_flow_auth_code</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L37-L39' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_flow_bearer_jwt-Tuple{}' href='#HTTR.oauth_flow_bearer_jwt-Tuple{}'>#</a>
+<strong><code>HTTR.oauth_flow_bearer_jwt</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L51-L53' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_flow_client_credentials-Tuple{}' href='#HTTR.oauth_flow_client_credentials-Tuple{}'>#</a>
+<strong><code>HTTR.oauth_flow_client_credentials</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L65-L67' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_flow_device-Tuple{}' href='#HTTR.oauth_flow_device-Tuple{}'>#</a>
+<strong><code>HTTR.oauth_flow_device</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L79-L81' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_flow_password-Tuple{}' href='#HTTR.oauth_flow_password-Tuple{}'>#</a>
+<strong><code>HTTR.oauth_flow_password</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L93-L95' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.oauth_flow_refresh-Tuple{}' href='#HTTR.oauth_flow_refresh-Tuple{}'>#</a>
+<strong><code>HTTR.oauth_flow_refresh</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L107-L109' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.obfuscate-Tuple{String}' href='#HTTR.obfuscate-Tuple{String}'>#</a>
+<strong><code>HTTR.obfuscate</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L116-L118' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.obfuscated-Tuple{String}' href='#HTTR.obfuscated-Tuple{String}'>#</a>
+<strong><code>HTTR.obfuscated</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L134-L136' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_body_form-Tuple{Request}' href='#HTTR.req_body_form-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_body_form</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L105-L107' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_body_json_modify-Tuple{Request, AbstractString}' href='#HTTR.req_body_json_modify-Tuple{Request, AbstractString}'>#</a>
+<strong><code>HTTR.req_body_json_modify</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L98-L100' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_body_multipart-Tuple{Request}' href='#HTTR.req_body_multipart-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_body_multipart</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L112-L114' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_cache-Tuple{Request, AbstractString}' href='#HTTR.req_cache-Tuple{Request, AbstractString}'>#</a>
+<strong><code>HTTR.req_cache</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/perform_a_request.jl#L56-L58' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_cookie_preserve-Tuple{Request, AbstractString}' href='#HTTR.req_cookie_preserve-Tuple{Request, AbstractString}'>#</a>
+<strong><code>HTTR.req_cookie_preserve</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L119-L121' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_dry_run-Tuple{Request}' href='#HTTR.req_dry_run-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_dry_run</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/debugging_and_testing.jl#L28-L30' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_error-Tuple{Request}' href='#HTTR.req_error-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_error</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/perform_a_request.jl#L71-L73' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_oauth_auth_code-Tuple{}' href='#HTTR.req_oauth_auth_code-Tuple{}'>#</a>
+<strong><code>HTTR.req_oauth_auth_code</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L30-L32' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_oauth_bearer_jwt-Tuple{}' href='#HTTR.req_oauth_bearer_jwt-Tuple{}'>#</a>
+<strong><code>HTTR.req_oauth_bearer_jwt</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L44-L46' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_oauth_client_credentials-Tuple{}' href='#HTTR.req_oauth_client_credentials-Tuple{}'>#</a>
+<strong><code>HTTR.req_oauth_client_credentials</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L58-L60' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_oauth_device-Tuple{}' href='#HTTR.req_oauth_device-Tuple{}'>#</a>
+<strong><code>HTTR.req_oauth_device</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L72-L74' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_oauth_password-Tuple{}' href='#HTTR.req_oauth_password-Tuple{}'>#</a>
+<strong><code>HTTR.req_oauth_password</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L86-L88' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_oauth_refresh-Tuple{}' href='#HTTR.req_oauth_refresh-Tuple{}'>#</a>
+<strong><code>HTTR.req_oauth_refresh</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/authentication.jl#L100-L102' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_options-Tuple{Request}' href='#HTTR.req_options-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_options</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L148-L150' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_perform_stream-Tuple{Request, Any}' href='#HTTR.req_perform_stream-Tuple{Request, Any}'>#</a>
+<strong><code>HTTR.req_perform_stream</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/perform_a_request.jl#L43-L45' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_proxy-Tuple{Request, AbstractString}' href='#HTTR.req_proxy-Tuple{Request, AbstractString}'>#</a>
+<strong><code>HTTR.req_proxy</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L164-L166' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_template-Tuple{Request}' href='#HTTR.req_template-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_template</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L178-L180' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_throttle-Tuple{Request, Number}' href='#HTTR.req_throttle-Tuple{Request, Number}'>#</a>
+<strong><code>HTTR.req_throttle</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/perform_a_request.jl#L82-L84' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_url_path-Tuple{Request}' href='#HTTR.req_url_path-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_url_path</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L210-L212' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_url_path_append-Tuple{Request}' href='#HTTR.req_url_path_append-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_url_path_append</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L217-L219' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.req_url_query-Tuple{Request}' href='#HTTR.req_url_query-Tuple{Request}'>#</a>
+<strong><code>HTTR.req_url_query</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/create_and_modify.jl#L203-L205' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.resp_header_exists-Tuple{HTTP.Messages.Response, AbstractString}' href='#HTTR.resp_header_exists-Tuple{HTTP.Messages.Response, AbstractString}'>#</a>
+<strong><code>HTTR.resp_header_exists</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">resp_header_exists</span><span class="p">(</span><span class="n">resp</span><span class="o">::</span><span class="kt">HTTP</span><span class="o">.</span><span class="n">Messages</span><span class="o">.</span><span class="n">Response</span><span class="p">,</span><span class="w"> </span><span class="n">header</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span>
+</code></pre></div>
+<p>Checks if the header exists in the response.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>resp::HTTP.Messages.Response</code>: The response object.</li>
+<li><code>header::AbstractString</code>: The name of the header.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>Bool</code>: Whether the header exists in the response.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/handle_the_response.jl#L138-L150' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.secret_decrypt-Tuple{AbstractString, AbstractString}' href='#HTTR.secret_decrypt-Tuple{AbstractString, AbstractString}'>#</a>
+<strong><code>HTTR.secret_decrypt</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">secret_decrypt</span><span class="p">(</span><span class="n">encrypted</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span><span class="o">::</span><span class="kt">String</span>
+</code></pre></div>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L56-L58' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.secret_decrypt_file-Tuple{AbstractString, AbstractString, Any}' href='#HTTR.secret_decrypt_file-Tuple{AbstractString, AbstractString, Any}'>#</a>
+<strong><code>HTTR.secret_decrypt_file</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L89-L91' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.secret_encrypt-Tuple{AbstractString, AbstractString}' href='#HTTR.secret_encrypt-Tuple{AbstractString, AbstractString}'>#</a>
+<strong><code>HTTR.secret_encrypt</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">secret_encrypt</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span><span class="o">::</span><span class="kt">String</span>
+</code></pre></div>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L49-L51' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.secret_encrypt_file-Tuple{AbstractString, AbstractString}' href='#HTTR.secret_encrypt_file-Tuple{AbstractString, AbstractString}'>#</a>
+<strong><code>HTTR.secret_encrypt_file</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L100-L102' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.secret_read_jld-Tuple{AbstractString, AbstractString}' href='#HTTR.secret_read_jld-Tuple{AbstractString, AbstractString}'>#</a>
+<strong><code>HTTR.secret_read_jld</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">secret_read_jld</span><span class="p">(</span><span class="n">path</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span><span class="o">::</span><span class="kt">String</span>
+</code></pre></div>
+<p>Read a secret from a JLD file. <code>secret_write_jld</code> is equivalent to <code>secret_write_rds</code> in R.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>path::AbstractString</code>: The path of the JLD file.</li>
+<li><code>key::AbstractString</code>: The secret key.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>String</code>: The secret.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L77-L89' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.secret_write_jld-Tuple{AbstractString, AbstractString, AbstractString}' href='#HTTR.secret_write_jld-Tuple{AbstractString, AbstractString, AbstractString}'>#</a>
+<strong><code>HTTR.secret_write_jld</code></strong> &mdash; <em>Method</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">HTTR</span><span class="o">.</span><span class="n">secret_write_jld</span><span class="p">(</span><span class="n">x</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">,</span><span class="w"> </span><span class="n">key</span><span class="o">::</span><span class="kt">AbstractString</span><span class="p">)</span><span class="o">::</span><span class="kt">String</span>
+</code></pre></div>
+<p>Write a secret to a JLD file. <code>secret_read_jld</code> is equivalent to <code>secret_read_rds</code> in R.</p>
+<p><strong>Arguments</strong></p>
+<ul>
+<li><code>x::AbstractString</code>: The secret to write.</li>
+<li><code>path::AbstractString</code>: The path of the JLD file.</li>
+<li><code>key::AbstractString</code>: The secret key.</li>
+</ul>
+<p><strong>Returns</strong></p>
+<ul>
+<li><code>String</code>: The path of the JLD file.</li>
+</ul>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L63-L76' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.unobfuscate-Tuple{HTTR.Obfuscated}' href='#HTTR.unobfuscate-Tuple{HTTR.Obfuscated}'>#</a>
+<strong><code>HTTR.unobfuscate</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/miscellaenous_helpers.jl#L141-L143' class='documenter-source'>source</a><br></p>
+<p><a id='HTTR.with_mocked_responses-Tuple{}' href='#HTTR.with_mocked_responses-Tuple{}'>#</a>
+<strong><code>HTTR.with_mocked_responses</code></strong> &mdash; <em>Method</em>.</p>
+<p><a target='_blank' href='https://github.com/TidierOrg/HTTR.jl/blob/1fcc90fed42a68805c7ac5b2cf0961eb1647efd7/src/requests/debugging_and_testing.jl#L53-L55' class='documenter-source'>source</a><br></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/kdpsingh" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/kdpsinghlab" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.annotate", "navigation.top", "navigation.footer", "search.highlight", "search.share", "search.suggest", "toc.follow", "header.autohide"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.af256bd8.min.js"></script>
+      
+        <script src="../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
