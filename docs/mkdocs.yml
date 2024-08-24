@@ -30,7 +30,7 @@ theme:
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: crimson
-      accent: teal
+      accent: crimson
       toggle:
         icon: material/weather-sunny
         name: Switch to dark mode
@@ -39,7 +39,7 @@ theme:
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: crimson
-      accent: teal
+      accent: crimson
       toggle:
         icon: material/weather-night
         name: Switch to light mode
@@ -116,4 +116,4 @@ plugins:
   #- mkdocs-video
 nav:
   - "Home": "index.md"
-  - "Reference" : "reference.md"
+  - "Reference": "reference.md"
