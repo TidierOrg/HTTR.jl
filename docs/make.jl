@@ -1,15 +1,13 @@
-using Documenter, DocumenterMarkdown
-using HTTR
+using Documenter, DocumenterMarkdown, HTTR
 
 include("genfiles.jl")
 
 DocTestMeta = quote
     using HTTR
 end
-
 DocMeta.setdocmeta!(HTTR, :DocTestSetup, DocTestMeta; recursive=true)
 
-makedocs(
+Documenter.makedocs(
     modules=[HTTR],
     clean=true,
     doctest=false,
@@ -26,12 +24,12 @@ makedocs(
         # :footnote, :meta_block, :missing_docs, :setup_block
     ], 
     checkdocs=:all, 
-    format=Markdown(), 
+    format=DocumenterMarkdown.Markdown(), 
     draft=false,
     build=joinpath(@__DIR__, "docs")
 )
 
-deploydocs(
+Documenter.deploydocs(
     devurl="latest", 
     repo="https://github.com/TidierOrg/HTTR.jl", 
     push_preview=true,
@@ -48,7 +46,7 @@ deploydocs(
         "jinja2", 
         "mkdocs-video"
     ),
-    make=() -> run(`mkdocs build`), 
+    make=() -> Base.run(`mkdocs build`), 
     target="site", 
     devbranch="main"
 )

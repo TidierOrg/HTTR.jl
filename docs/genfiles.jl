@@ -1,5 +1,4 @@
-using Documenter, DocumenterMarkdown
-using Literate
+using Documenter, DocumenterMarkdown, Literate
 
 get_example_path(p) = joinpath(@__DIR__, ".", "examples", p)
 OUTPUT = joinpath(@__DIR__, "src", "examples", "generated")

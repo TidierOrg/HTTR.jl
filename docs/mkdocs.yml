@@ -1,7 +1,6 @@
-
 theme:
   name: material
-  logo: assets/logo.png
+  #logo: assets/logo.png
   features:
     - content.code.copy
     # - announce.dismiss
@@ -31,7 +30,7 @@ theme:
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: crimson
-      accent: cyan
+      accent: teal
       toggle:
         icon: material/weather-sunny
         name: Switch to dark mode
@@ -40,7 +39,7 @@ theme:
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: crimson
-      accent: cyan
+      accent: teal
       toggle:
         icon: material/weather-night
         name: Switch to light mode
@@ -82,6 +81,11 @@ extra_css:
   - stylesheets/custom.css
   - assets/Documenter.css
 
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
 markdown_extensions:
   - tables
   - admonition
@@ -112,3 +116,4 @@ plugins:
   #- mkdocs-video
 nav:
   - "Home": "index.md"
+  - "Reference" : "reference.md"
