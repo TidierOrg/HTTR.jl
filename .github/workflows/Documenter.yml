@@ -22,6 +22,8 @@ jobs:
       - uses: julia-actions/cache@v1
         with:
           cache-registries: "true"
+      - name: Install HTTR package # use this since HTTR is not in the registry
+        run: julia -e 'using Pkg; Pkg.add(url="https://github.com/TidierOrg/HTTR.jl")'
       - name: Install documentation dependencies
         run: julia --project=docs -e 'using Pkg; pkg"dev ."; Pkg.instantiate()'
       - name: Build and deploy

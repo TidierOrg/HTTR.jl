@@ -7,7 +7,7 @@ DocTestMeta = quote
 end
 DocMeta.setdocmeta!(HTTR, :DocTestSetup, DocTestMeta; recursive=true)
 
-Documenter.makedocs(
+makedocs(
     modules=[HTTR],
     clean=true,
     doctest=false,
@@ -22,31 +22,31 @@ Documenter.makedocs(
         # Other available options are
         # :autodocs_block, :cross_references, :docs_block, :eval_block, :example_block,
         # :footnote, :meta_block, :missing_docs, :setup_block
-    ], 
-    checkdocs=:all, 
-    format=DocumenterMarkdown.Markdown(), 
+    ],
+    checkdocs=:all,
+    format=Markdown(),
     draft=false,
     build=joinpath(@__DIR__, "docs")
 )
 
-Documenter.deploydocs(
-    devurl="latest", 
-    repo="https://github.com/TidierOrg/HTTR.jl", 
+deploydocs(
+    devurl="latest",
+    repo="https://github.com/TidierOrg/HTTR.jl",
     push_preview=true,
     deps=Deps.pip(
-        "mkdocs", 
-        "pygments", 
-        "python-markdown-math", 
+        "mkdocs",
+        "pygments",
+        "python-markdown-math",
         "mkdocs-material",
         "pymdown-extensions",
-        "mkdocstrings", 
+        "mkdocstrings",
         "mknotebooks",
-        "pytkdocs_tweaks", 
-        "mkdocs_include_exclude_files", 
-        "jinja2", 
+        "pytkdocs_tweaks",
+        "mkdocs_include_exclude_files",
+        "jinja2",
         "mkdocs-video"
     ),
-    make=() -> Base.run(`mkdocs build`), 
-    target="site", 
+    make=() -> Base.run(`mkdocs build`),
+    target="site",
     devbranch="main"
 )
